@@ -5,6 +5,7 @@
     font-family: Inter, sans-serif;
 }
 
+
 button{
     cursor: pointer;
     font-family: Inter, sans-serif;
@@ -18,6 +19,7 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .topBar{
     position: fixed;
     top: 0;
@@ -153,7 +155,6 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    overflow-y: auto;
     border-radius: 14px;
     border: 1px solid #D4D4D8;
 }
@@ -451,16 +452,78 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 100%;
 }
 .overlay {
-  position: fixed; /* Cover the whole screen */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+  background: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10; /* Make sure it's on top */
+  z-index: 10; 
 }
+
+
+/*******************debut achat*****************************/
+
+.achat{
+    height: 485px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    position: relative; 
+}
+
+.achatoptions{
+    flex: 1;
+    overflow-y: auto;
+}
+.achatoptions::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+
+.achatAnuuler{
+    padding-left: 6px;
+    padding: 8px;
+    border-radius: 12.68px;
+    border: none;
+    background-color: #FEE1EA;
+    color: #F31260;
+    font-weight: 600;
+    font-size: 13px;
+    width: 100%;
+    bottom: 0;
+
+}
+
+
+.achat-vente-buttons {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.achat-button {
+    flex: 1;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.achat-button {
+    background-color: #167ABC;
+    color: white;
+}
+
+
+/*******************fin achat*****************************/
+
 
 /***********************************--transaction--*******************************************/

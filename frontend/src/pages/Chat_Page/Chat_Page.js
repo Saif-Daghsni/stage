@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Chat_Page.css';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import Select from 'react-select';
-
+import AchatOptions from '../tools/AchatOptions'
 // eslint-disable-next-line no-unused-vars
 function Input_vente(props) {
   const [value, setValue] = useState('');
@@ -32,6 +32,7 @@ function Input_vente(props) {
     <div className='new-div-input'>
       <input
         className='new-vente-input'
+        // eslint-disable-next-line react/prop-types
         placeholder={props.name}
         type='text'
         value={value}
@@ -108,7 +109,8 @@ const typeoptions = [
 ];
 
 const Chat_Page = () => {
-  const [vente, setVente] = useState(false);
+  const [conversation, setConversation] = useState(false);
+  const [achat, setachat] = useState(false);
   const [prixNego, setPrixNego] = useState(false);
   const [publier, setPublier] = useState(false);
   const [type, setType] = useState('');
@@ -126,7 +128,7 @@ const Chat_Page = () => {
   };
 
   return (
-    <div>
+    <div >
       <div className='topBar'></div>
       <div className='navBar'>
         <div className='container'>
@@ -150,6 +152,7 @@ const Chat_Page = () => {
                 </div>
               </div>
 
+              {/* debut  transaction */}
               <div className='transaction'>
                 <div className='transaction-top'>
                   <label className='transaction-label'>
@@ -160,7 +163,8 @@ const Chat_Page = () => {
                   </button>
                 </div>
 
-                {vente ? (
+                
+                {achat? (
                   <div className='transaction-Bottom-vente'>
                     <label className='vente-title'>Vente</label>
 
@@ -237,7 +241,7 @@ const Chat_Page = () => {
                     <div className='transaction-Bottom-vente-buttons'>
                       <button
                         className='transaction-Bottom-vente-buttons1'
-                        onClick={() => setVente(false)}
+                        onClick={() => setConversation(false)}
                       >
                         Annuler la demande
                       </button>
@@ -249,7 +253,35 @@ const Chat_Page = () => {
                       </button>
                     </div>
                   </div>
-                ) : (
+                  
+                ) : conversation ?(
+                  <div className='achat'>
+
+                    <div className='achatoptions'>
+                                            <div className='achat-vente-buttons'>
+    <button 
+      className='achat-button'
+    >
+      Besoin d’achat
+    </button>    
+    <button 
+      className='achat-button'
+    >
+      Besoin de vente
+    </button>
+  </div>
+                      <AchatOptions />
+                      <AchatOptions />
+                      <AchatOptions />
+                      <AchatOptions />
+                      <AchatOptions />
+                      <AchatOptions />
+                    </div>
+                    <button className='achatAnuuler' onClick={() => setConversation(!conversation)}>
+                      Annuler
+                    </button>
+                  </div>
+                ):(
                   <div className='transaction-Bottom'>
                     <img
                       src='/transactions/buttom.jpg'
@@ -257,15 +289,18 @@ const Chat_Page = () => {
                     />
                     <button
                       className='transaction-Bottom-button1'
-                      onClick={() => setVente(true)}
+                      onClick={() => setConversation(true)}
                     >
-                      Besoin de vente
+                      La conversation public
                     </button>
-                    <button className='transaction-Bottom-button1'>
-                      Besoin d’achat
+                    <button className='transaction-Bottom-button1'
+                      onClick={() => setachat(true)}>
+                      Votre historique
                     </button>
                   </div>
                 )}
+
+                {/* debut confirmation */}
 
                 {publier && <div className='overlay'></div>}
 
@@ -323,6 +358,7 @@ const Chat_Page = () => {
                   </div>
                 )}
               </div>
+              {/* Fin confirmation */}
               {/* Fin transaction */}
             </div>
           </div>
