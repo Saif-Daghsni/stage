@@ -1,0 +1,86 @@
+.consulter-container{
+    
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:90000 ;
+}
+
+.consulter-container-under{
+    
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    flex-direction: column;
+    display:flex;
+    padding: 15px;
+    justify-content: center;
+}
+.button-row {
+  display: flex;
+  width: 100%;
+  gap: 10px; /* espace entre les boutons */
+}
+
+.communique-button,
+.confirme-button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.negocier-active{
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+    background:#3F3F46 ;
+    color:#E4E4E7;
+    opacity: .2;
+}
+
+.communique-button {
+  background: #CFFAE2;
+  color: #16A34A;
+}
+
+.confirme-button {
+  background: #CDE3F2;
+  color: #167ABC;
+}
+
+.annuler-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #FEE1EA;
+  color: #F31260;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.overlay123{
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -10; 
+
+}

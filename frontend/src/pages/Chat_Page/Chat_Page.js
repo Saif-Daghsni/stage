@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './Chat_Page.css';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import Select from 'react-select';
-import AchatOptions from '../tools/AchatOptions'
+import AchatOptions from '../tools/AchatOptions';
+
 // eslint-disable-next-line no-unused-vars
 function Input_vente(props) {
   const [value, setValue] = useState('');
@@ -109,15 +110,18 @@ const typeoptions = [
 ];
 
 const Chat_Page = () => {
-  const [conversation, setConversation] = useState(false);
-  const [achat, setachat] = useState(false);
   const [prixNego, setPrixNego] = useState(false);
-  const [publier, setPublier] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [quantite, setQuantite] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [prix, setPrix] = useState('');
+  const [quantiteNego, setQuantiteNego] = useState(false);
   const [type, setType] = useState('');
   const [gamme, setGamme] = useState('');
-  const [quantite, setQuantite] = useState('');
-  const [prix, setPrix] = useState('');
-  const [quantiteNego, setQuantiteNego] = useState('');
+  const [publier, setPublier] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [achat, setachat] = useState(false);
+  const [vente, setvente] = useState(true);
 
   const handleChangeType = (option) => {
     setType(option);
@@ -127,13 +131,18 @@ const Chat_Page = () => {
     setGamme(option);
   };
 
+  const [conversation, setConversation] = useState(false);
+
   return (
-    <div >
+    <div>
+      
       <div className='topBar'></div>
+
       <div className='navBar'>
         <div className='container'>
           <div className='under-container'>
             <label className='logo'>Chat</label>
+
             <div className='divs'>
               <div className='users'></div>
 
@@ -141,6 +150,7 @@ const Chat_Page = () => {
                 <div className='chat-top'>
                   <label className='transaction-label'>User</label>
                 </div>
+
                 <div className='chat-container'>
                   <div className='chat-bottom'>
                     <input
@@ -163,113 +173,159 @@ const Chat_Page = () => {
                   </button>
                 </div>
 
-                
-                {achat? (
-                  <div className='transaction-Bottom-vente'>
-                    <label className='vente-title'>Vente</label>
-
-                    <label className='vente-label'>Type</label>
-                    <Select
-                      options={typeoptions}
-                      value={type}
-                      onChange={handleChangeType}
-                      name='type'
-                      styles={customStyles}
-                      placeholder='Select a type'
-                    />
-
-                    <label className='vente-label'>Gamme</label>
-                    <Select
-                      options={gammeOptions}
-                      value={gamme}
-                      onChange={handleChangeGamme}
-                      name='gamme'
-                      styles={customStyles}
-                      placeholder='Select a gamme'
-                    />
-
-                    <label className='vente-label'>Quantité</label>
-                    <div className='Pricerow'>
-                      <input
-                        className='vente-input-prix'
-                        type='number'
-                        placeholder='Quantité'
-                        onChange={(e) => setQuantite(e.target.value)}
-                      />
-                      <div className='prixdiv'>
-                        <label className='custom-checkbox'>
-                          <input
-                            type='checkbox'
-                            className='prixcheckbox'
-                            name='agree'
-                          />
-                          <span
-                            className='checkmark'
-                            onClick={() => setQuantiteNego(!quantiteNego)}
-                          ></span>
-                          <span className='Prixlabel'>
-                            Quantité négociable
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <label className='vente-label'>Prix</label>
-                    <div className='Pricerow'>
-                      <input
-                        className='vente-input-prix'
-                        type='number'
-                        placeholder='Prix'
-                        onChange={(e) => setPrix(e.target.value)}
-                      />
-                      <div className='prixdiv'>
-                        <label className='custom-checkbox'>
-                          <input
-                            type='checkbox'
-                            className='prixcheckbox'
-                            name='agree'
-                          />
-                          <span
-                            className='checkmark'
-                            onClick={() => setPrixNego(!prixNego)}
-                          ></span>
-                          <span className='Prixlabel'>Prix négociable</span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className='transaction-Bottom-vente-buttons'>
-                      <button
-                        className='transaction-Bottom-vente-buttons1'
-                        onClick={() => setConversation(false)}
-                      >
-                        Annuler la demande
-                      </button>
-                      <button
-                        className='transaction-Bottom-vente-buttons2'
-                        onClick={() => setPublier(!publier)}
-                      >
-                        Publier
-                      </button>
-                    </div>
-                  </div>
+                {vente ? (
                   
-                ) : conversation ?(
-                  <div className='achat'>
+    <div className='transaction-Bottom-vente'>
+      <label className='vente-title'>Vente</label>
 
+      <label className='vente-label'>Type</label>
+      <Select
+        options={typeoptions}
+        value={type}
+        onChange={handleChangeType}
+        name='type'
+        styles={customStyles}
+        placeholder='Select a type'
+      />
+
+      <label className='vente-label'>Gamme</label>
+      <Select
+        options={gammeOptions}
+        value={gamme}
+        onChange={handleChangeGamme}
+        name='gamme'
+        styles={customStyles}
+        placeholder='Select a gamme'
+      />
+
+      {/* debut Quantité & Prix */}
+      <div className='quantite-prix-block'>
+        <label className='vente-label'>Quantité</label>
+        <div className='Pricerow'>
+          <input
+            className='vente-input-prix'
+            type='number'
+            placeholder='Quantité'
+            onChange={(e) => setQuantite(e.target.value)}
+          />
+          <div className='prixdiv'>
+            <label className='custom-checkbox'>
+              <input type='checkbox' className='prixcheckbox' name='agree' />
+              <span
+                className='checkmark'
+                onClick={() => setQuantiteNego(!quantiteNego)}
+              ></span>
+              <span className='Prixlabel'>Quantité négociable</span>
+            </label>
+          </div>
+        </div>
+
+        <label className='vente-label'>Prix</label>
+        <div className='Pricerow'>
+          <input
+            className='vente-input-prix'
+            type='number'
+            placeholder='Prix'
+            onChange={(e) => setPrix(e.target.value)}
+          />
+          <div className='prixdiv'>
+            <label className='custom-checkbox'>
+              <input type='checkbox' className='prixcheckbox' name='agree' />
+              <span
+                className='checkmark'
+                onClick={() => setPrixNego(!prixNego)}
+              ></span>
+              <span className='Prixlabel'>Prix négociable</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      {/* fin Quantité & Prix */}
+
+      <div className='transaction-Bottom-vente-buttons'>
+        <button
+          className='transaction-Bottom-vente-buttons1'
+          // eslint-disable-next-line react/prop-types
+          onClick={() => setvente(false)}
+        >
+          Annuler la demande
+        </button>
+        <button
+          className='transaction-Bottom-vente-buttons2'
+          onClick={() => setPublier(!publier)}
+        >
+          Publier
+        </button>
+      </div>
+
+      {/* debut confirmation */}
+
+      {publier && <div className='overlay'></div>}
+
+      {publier && (
+        <div className='confirmation'>
+          <div className='confirmation-container'>
+            <div className='Pricerow'>
+              <label className='confirmation-label'>Type :</label>
+              <a>{type ? type.label : ''}</a>
+            </div>
+
+            <div className='Pricerow'>
+              <label className='confirmation-label'>Gamme :</label>
+              <a>{gamme ? gamme.label : ''}</a>
+            </div>
+
+            <div className='Pricerow1'>
+              <div className='Pricerow'>
+                <label className='confirmation-label'>
+                  Quantité :
+                </label>
+                <a>{quantite}</a>
+              </div>
+              {quantiteNego ? (
+                <a className='nego'>Quantité négociable</a>
+              ) : (
+                <a className='Pasnego'>Quantité pas négociable</a>
+              )}
+            </div>
+
+            <div className='Pricerow1'>
+              <div className='Pricerow'>
+                <label className='confirmation-label'>Prix :</label>
+                <a>{prix} dt</a>
+              </div>
+              {prixNego ? (
+                <a className='nego'>Prix négociable</a>
+              ) : (
+                <a className='Pasnego'>Prix pas négociable</a>
+              )}
+            </div>
+
+            <div className='Pricerow'>
+              <button
+                className='transaction-Bottom-vente-buttons1'
+                onClick={() => setPublier(!publier)}
+              >
+                cancel
+              </button>
+              <button className='transaction-Bottom-vente-buttons2'>
+                confirme
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fin confirmation */}
+    </div>
+                ): conversation  ? (
+                  <div className='achat'>
                     <div className='achatoptions'>
-                                            <div className='achat-vente-buttons'>
-    <button 
-      className='achat-button'
-    >
-      Besoin d’achat
-    </button>    
-    <button 
-      className='achat-button'
-    >
-      Besoin de vente
-    </button>
-  </div>
+                      <div className='achat-vente-buttons'>
+                        <button className='achat-button' onClick={() =>setachat(true)}>Besoin d’achat</button>
+                        <button className='achat-button' onClick={() =>setvente(true)}>Besoin de vente</button>
+                      </div>
+
                       <AchatOptions />
                       <AchatOptions />
                       <AchatOptions />
@@ -277,88 +333,34 @@ const Chat_Page = () => {
                       <AchatOptions />
                       <AchatOptions />
                     </div>
-                    <button className='achatAnuuler' onClick={() => setConversation(!conversation)}>
+
+                    <button
+                      className='achatAnuuler'
+                      onClick={() => setConversation(!conversation)}
+                    >
                       Annuler
                     </button>
                   </div>
-                ):(
+                ) : (
                   <div className='transaction-Bottom'>
-                    <img
-                      src='/transactions/buttom.jpg'
-                      alt='imgbuttom'
-                    />
+                    <img src='/transactions/buttom.jpg' alt='imgbuttom' />
                     <button
                       className='transaction-Bottom-button1'
                       onClick={() => setConversation(true)}
                     >
                       La conversation public
                     </button>
-                    <button className='transaction-Bottom-button1'
-                      onClick={() => setachat(true)}>
+                    <button
+                      className='transaction-Bottom-button1'
+                      // onClick={() => setachat(true)}
+                    >
                       Votre historique
                     </button>
                   </div>
                 )}
 
-                {/* debut confirmation */}
 
-                {publier && <div className='overlay'></div>}
-
-                {publier && (
-                  <div className='confirmation'>
-                    <div className='confirmation-container'>
-                      <div className='Pricerow'>
-                        <label className='confirmation-label'>Type :</label>
-                        <a>{type ? type.label : ''}</a>
-                      </div>
-
-                      <div className='Pricerow'>
-                        <label className='confirmation-label'>Gamme :</label>
-                        <a>{gamme ? gamme.label : ''}</a>
-                      </div>
-
-                      <div className='Pricerow1'>
-                        <div className='Pricerow'>
-                          <label className='confirmation-label'>
-                            Quantité :
-                          </label>
-                          <a>{quantite}</a>
-                        </div>
-                        {quantiteNego ? (
-                          <a className='nego'>Quantité négociable</a>
-                        ) : (
-                          <a className='Pasnego'>Quantité pas négociable</a>
-                        )}
-                      </div>
-
-                      <div className='Pricerow1'>
-                        <div className='Pricerow'>
-                          <label className='confirmation-label'>Prix :</label>
-                          <a>{prix} dt</a>
-                        </div>
-                        {prixNego ? (
-                          <a className='nego'>Prix négociable</a>
-                        ) : (
-                          <a className='Pasnego'>Prix pas négociable</a>
-                        )}
-                      </div>
-
-                      <div className='Pricerow'>
-                        <button
-                          className='transaction-Bottom-vente-buttons1'
-                          onClick={() => setPublier(!publier)}
-                        >
-                          cancel
-                        </button>
-                        <button className='transaction-Bottom-vente-buttons2'>
-                          confirme
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
-              {/* Fin confirmation */}
               {/* Fin transaction */}
             </div>
           </div>
