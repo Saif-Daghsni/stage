@@ -9,7 +9,7 @@ import {
 import Login from "./pages/Login";
 
 import Signup from "./pages/Signup";
-
+/* le vente 70% */
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate(); // Hook pour la navigation
