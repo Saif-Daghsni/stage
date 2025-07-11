@@ -4,8 +4,8 @@ import "./AchatOptions.css";
 import { FiCheck } from "react-icons/fi";
 import Consulter from "./Consulter";
 import PropTypes from 'prop-types';
-import Vente from "../tools/Vente"
-
+import Vente from "../tools/Vente";
+import { FaHandshake } from 'react-icons/fa';
 
 const AchatOptions = (props) => {
   const [details, setdetails] = useState(false);
@@ -25,24 +25,20 @@ const AchatOptions = (props) => {
             Demande de Tony Reichert
           </label>
 
-          <div className="option-details-row">
-            <label>Type    :</label>
+          <div className="option-details-title-container">
+            <div className="option-details-title-container-title">
+              
+              <label className="option-details-row-label">Type:</label>
+              <label className="option-details-row-label">Gamme:</label>
+              <label className="option-details-row-label">Quantité:</label>
+              <label className="option-details-row-label">Prix:</label>
+            </div>
+            <div className="option-details-title-container-values">
             <a>Matiere premiers</a>
-          </div>
-
-          <div className="option-details-row">
-            <label>Gamme :</label>
             <a>Moyenne gamme</a>
-          </div>
-
-          <div className="option-details-row">
-            <label>Quantité:</label>
-            <a>40</a>
-          </div>
-
-          <div className="option-details-row">
-            <label>Prix        :</label>
-            <a>200.000 dt</a>
+            <div><a>40</a><FaHandshake style={{ color: '#166534' }} size={20} /></div>
+            <div><a>200.000 dt</a><FaHandshake style={{ color: '#B91C1C' }} size={20} /></div>
+            </div>
           </div>
         </div>
       </div>

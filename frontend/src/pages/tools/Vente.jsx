@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 //import { FiPlus, FiMinus } from 'react-icons/fi';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+import "./Vente.css";
+
 /*
 function Input_vente(props) {
   const [value, setValue] = useState('');
@@ -115,7 +117,7 @@ const Vente = (props) => {
   const [quantiteNego, setQuantiteNego] = useState(false);
   const [type, setType] = useState('');
   const [gamme, setGamme] = useState('');
-  const [publier, setPublier] = useState(false);
+  const [publier, setPublier] = useState(true);
 
 
   const handleChangeType = (option) => {
@@ -221,6 +223,7 @@ const Vente = (props) => {
 
       {publier && (
         <div className='confirmation'>
+            <div className='confirmation-container-top'>Votre information</div>
           <div className='confirmation-container'>
             <div className='Pricerow'>
               <label className='confirmation-label'>Type :</label>

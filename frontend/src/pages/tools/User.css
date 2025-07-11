@@ -1,0 +1,15 @@
+.users-container{
+    padding: 15px;
+}
+
+.user-input{
+    width: 100%;
+    border-radius: 20px;
+    padding-left: 10px;
+    height: 35px;
+    outline: none;
+    border: none;
+    background-color: #F4F4F5 ;
+    color: #71717A;
+
+}

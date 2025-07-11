@@ -1,8 +1,10 @@
 import React from 'react'
-
+import "./User.css"
 const User = () => {
   return (
-    <div>User</div>
+    <div className='users-container'>
+      <input type="text" className='user-input' placeholder='Recherche'/>
+    </div>
   )
 }
 

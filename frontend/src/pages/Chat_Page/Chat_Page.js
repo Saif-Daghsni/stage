@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Chat_Page.css';
 import AchatOptions from '../tools/AchatOptions';
 import Vente from "../tools/Vente";
-// import User from '../tools/User';
+import User from '../tools/User';
 
 
 const Chat_Page = () => {
@@ -11,7 +11,7 @@ const Chat_Page = () => {
   const [achat, setachat] = useState(false);
   const [vente, setvente] = useState(false);
   const [Lesvente, setLesvente] = useState(false);
-  const [Lesachat, setLesachat] = useState(true);
+  const [Lesachat, setLesachat] = useState(false);
   const [conversation, setConversation] = useState(false);
   const [historique, sethistorique] = useState(false);
 
@@ -27,6 +27,7 @@ const Chat_Page = () => {
 
             <div className='divs'>
               <div className='users'>
+                <User />
               </div>
 
               <div className='chat'>
