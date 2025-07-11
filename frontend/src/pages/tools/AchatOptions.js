@@ -4,7 +4,7 @@ import './AchatOptions.css';
 import { FiCheck } from 'react-icons/fi';
 import Consulter from './Consulter';
 
-const AchatOptions = () => {
+const AchatOptions = (props) => {
   const [details, setdetails] = useState(false);
   const [consulter, setConsulter] = useState(false);
   const [confirme, setConfirme] = useState(true);
@@ -32,17 +32,15 @@ const AchatOptions = () => {
           <div className='option-details-row'>
             <label>Quantité :</label>
             <a>40</a>
+          {/* <p className='option-details-nego'> Négociable</p> */}
           </div>
 
           <div className='option-details-row'>
             <label>Prix :</label>
             <a>200.000 dt</a>
+          {/* <p className='option-details-nego'> Négociable</p> */}
           </div>
 
-          <a className='option-details-nego'>Quantité négociable</a>
-          {/* <a className='option-details-Pasnego'>Quantité pas négociable</a> */}
-          {/* <a className='option-details-nego'>Prix négociable</a> */}
-          <a className='option-details-Pasnego'>Prix pas négociable</a>
         </div>
       </div>
 
@@ -56,7 +54,7 @@ const AchatOptions = () => {
             className='option-details-Consulter-Consulter'
             onClick={() => setConsulter(true)}
           >
-            Consulter
+            {props.button}
           </button>
         </div>
       ) : (

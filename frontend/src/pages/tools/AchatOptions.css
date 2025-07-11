@@ -43,17 +43,13 @@ button{
     font-size: 12px;
     font-weight: 600;
     margin-top: 5px;
+    margin-left: 8px;
 }
 
-.option-details-Pasnego{
-    color: #DC2626  ;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 5px;
-}
 .option-details-row{
     display: flex;
     flex-direction: row;
+    align-items: center
 }
 .option-details-row label ,.option-details-row a{
     margin-top: 5px;
@@ -85,23 +81,8 @@ button{
     margin-top: 5px;
 }
 
-.option-details-Consulter-Consulter{
-    position:relative;
-    display: flex;
-    flex: 2;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 12.68px;
-    border: none;
-    background-color: #CDE3F2;
-    color: #167ABC;
-    font-weight: 600;
-    font-size: 12px;
-    align-self: flex-end;
-    margin-top: 5px;
-    margin-left: 8px;
-}
+
+
 .option-details-Consulter img {
     height: 10px;
     width: auto;
@@ -110,12 +91,30 @@ button{
 .option-details-row-buttons{
     display: flex;
     justify-content: center;
-    flex-direction: row;
     width: 90%;
     margin-bottom: 10px;
     align-self: center; 
+    position: relative;
+    justify-content: flex-end; 
 }
 
+.option-details-Consulter-Consulter {
+  position: relative;  
+  bottom: 0;           
+  right: 0;           
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+  border-radius: 12.68px;
+  border: none;
+  background-color: #CDE3F2;
+  color: #167ABC;
+  font-weight: 600;
+  font-size: 12px;
+}
 
 .option-details-details{
     

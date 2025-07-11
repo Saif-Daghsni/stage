@@ -3,6 +3,7 @@ import './Chat_Page.css';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import Select from 'react-select';
 import AchatOptions from '../tools/AchatOptions';
+// import User from '../tools/User';
 
 // eslint-disable-next-line no-unused-vars
 function Input_vente(props) {
@@ -111,17 +112,19 @@ const typeoptions = [
 
 const Chat_Page = () => {
   const [prixNego, setPrixNego] = useState(false);
-  // eslint-disable-next-line no-unused-vars
+  const [prixNego2, setPrixNego2] = useState(false);
   const [quantite, setQuantite] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [prix, setPrix] = useState('');
   const [quantiteNego, setQuantiteNego] = useState(false);
+  const [quantiteNego2, setQuantiteNego2] = useState(false);
   const [type, setType] = useState('');
   const [gamme, setGamme] = useState('');
   const [publier, setPublier] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [achat, setachat] = useState(false);
-  const [vente, setvente] = useState(true);
+  const [vente, setvente] = useState(false);
+  const [historique, sethistorique] = useState(false);
+  const [Lesvente, setLesvente] = useState(false);
+  const [Lesachat, setLesachat] = useState(true);
 
   const handleChangeType = (option) => {
     setType(option);
@@ -144,7 +147,8 @@ const Chat_Page = () => {
             <label className='logo'>Chat</label>
 
             <div className='divs'>
-              <div className='users'></div>
+              <div className='users'>
+              </div>
 
               <div className='chat'>
                 <div className='chat-top'>
@@ -215,7 +219,7 @@ const Chat_Page = () => {
                 className='checkmark'
                 onClick={() => setQuantiteNego(!quantiteNego)}
               ></span>
-              <span className='Prixlabel'>Quantité négociable</span>
+              <span className='Prixlabel'>Négociable</span>
             </label>
           </div>
         </div>
@@ -235,7 +239,7 @@ const Chat_Page = () => {
                 className='checkmark'
                 onClick={() => setPrixNego(!prixNego)}
               ></span>
-              <span className='Prixlabel'>Prix négociable</span>
+              <span className='Prixlabel'>Négociable</span>
             </label>
           </div>
         </div>
@@ -283,9 +287,9 @@ const Chat_Page = () => {
                 <a>{quantite}</a>
               </div>
               {quantiteNego ? (
-                <a className='nego'>Quantité négociable</a>
+                <a className='nego'>Négociable</a>
               ) : (
-                <a className='Pasnego'>Quantité pas négociable</a>
+                <a className='Pasnego'>Pas négociable</a>
               )}
             </div>
 
@@ -295,9 +299,9 @@ const Chat_Page = () => {
                 <a>{prix} dt</a>
               </div>
               {prixNego ? (
-                <a className='nego'>Prix négociable</a>
+                <a className='nego'>Négociable</a>
               ) : (
-                <a className='Pasnego'>Prix pas négociable</a>
+                <a className='Pasnego'>Pas négociable</a>
               )}
             </div>
 
@@ -318,7 +322,151 @@ const Chat_Page = () => {
 
       {/* Fin confirmation */}
     </div>
-                ): conversation  ? (
+                ):achat?(
+                      <div className='transaction-Bottom-vente'>
+      <label className='vente-title'>Achat</label>
+
+      <label className='vente-label'>Type</label>
+      <Select
+        options={typeoptions}
+        value={type}
+        onChange={handleChangeType}
+        name='type'
+        styles={customStyles}
+        placeholder='Select a type'
+      />
+
+      <label className='vente-label'>Gamme</label>
+      <Select
+        options={gammeOptions}
+        value={gamme}
+        onChange={handleChangeGamme}
+        name='gamme'
+        styles={customStyles}
+        placeholder='Select a gamme'
+      />
+
+      {/* debut Quantité & Prix */}
+      <div className='quantite-prix-block'>
+        <label className='vente-label'>Quantité</label>
+        <div className='Pricerow'>
+          <input
+            className='vente-input-prix'
+            type='number'
+            placeholder='Quantité'
+            onChange={(e) => setQuantite(e.target.value)}
+          />
+          <div className='prixdiv'>
+            <label className='custom-checkbox'>
+              <input type='checkbox' className='prixcheckbox' name='agree' />
+              <span
+                className='checkmark'
+                onClick={() => setQuantiteNego2(!quantiteNego2)}
+              ></span>
+              <span className='Prixlabel'>Négociable</span>
+            </label>
+          </div>
+        </div>
+
+        <label className='vente-label'>Prix</label>
+        <div className='Pricerow'>
+          <input
+            className='vente-input-prix'
+            type='number'
+            placeholder='Prix'
+            onChange={(e) => setPrix(e.target.value)}
+          />
+          <div className='prixdiv'>
+            <label className='custom-checkbox'>
+              <input type='checkbox' className='prixcheckbox' name='agree' />
+              <span
+                className='checkmark'
+                onClick={() => setPrixNego2(!prixNego2)}
+              ></span>
+              <span className='Prixlabel'>Négociable</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      {/* fin Quantité & Prix */}
+
+      <div className='transaction-Bottom-vente-buttons'>
+        <button
+          className='transaction-Bottom-vente-buttons1'
+          // eslint-disable-next-line react/prop-types
+          onClick={() => setachat(false)}
+        >
+          Annuler la demande
+        </button>
+        <button
+          className='transaction-Bottom-vente-buttons2'
+          onClick={() => setPublier(!publier)}
+        >
+          Publier
+        </button>
+      </div>
+
+      {/* debut confirmation */}
+
+      {publier && <div className='overlay'></div>}
+
+      {publier && (
+        <div className='confirmation'>
+          <div className='confirmation-container'>
+            <div className='Pricerow'>
+              <label className='confirmation-label'>Type :</label>
+              <a>{type ? type.label : ''}</a>
+            </div>
+
+            <div className='Pricerow'>
+              <label className='confirmation-label'>Gamme :</label>
+              <a>{gamme ? gamme.label : ''}</a>
+            </div>
+
+            <div className='Pricerow1'>
+              <div className='Pricerow'>
+                <label className='confirmation-label'>
+                  Quantité :
+                </label>
+                <a>{quantite}</a>
+              </div>
+              {quantiteNego2 ? (
+                <a className='nego'>Négociable</a>
+              ) : (
+                <a className='Pasnego'>Pas négociable</a>
+              )}
+            </div>
+
+            <div className='Pricerow1'>
+              <div className='Pricerow'>
+                <label className='confirmation-label'>Prix :</label>
+                <a>{prix} dt</a>
+              </div>
+              {prixNego2 ? (
+                <a className='nego'>Négociable</a>
+              ) : (
+                <a className='Pasnego'>Pas négociable</a>
+              )}
+            </div>
+
+            <div className='Pricerow'>
+              <button
+                className='transaction-Bottom-vente-buttons1'
+                onClick={() => setPublier(!publier)}
+              >
+                cancel
+              </button>
+              <button className='transaction-Bottom-vente-buttons2'>
+                confirme
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fin confirmation */}
+    </div>
+                ) : conversation  ? (
                   <div className='achat'>
                     <div className='achatoptions'>
                       <div className='achat-vente-buttons'>
@@ -326,22 +474,55 @@ const Chat_Page = () => {
                         <button className='achat-button' onClick={() =>setvente(true)}>Besoin de vente</button>
                       </div>
 
-                      <AchatOptions />
-                      <AchatOptions />
-                      <AchatOptions />
-                      <AchatOptions />
-                      <AchatOptions />
-                      <AchatOptions />
+                      <AchatOptions button={"Consulter"}/>
+                      <AchatOptions button={"Consulter"}/>
+                      <AchatOptions button={"Consulter"}/>
+                      <AchatOptions button={"Consulter"}/>
+                      <AchatOptions button={"Consulter"}/>
+                      <AchatOptions button={"Consulter"}/>
                     </div>
 
                     <button
                       className='achatAnuuler'
-                      onClick={() => setConversation(!conversation)}
+                      onClick={() => setConversation(false)}
                     >
                       Annuler
                     </button>
                   </div>
-                ) : (
+                ): historique ?
+                (
+                  <div className='achat'>
+                    <div className='achatoptions'>
+                      <div className='achat-vente-buttons'>
+                        <button 
+                        className={Lesachat ? 'achat-button-active' : 'achat-button-inactive'}
+                        onClick={() => {setLesachat(true);setLesvente(false)}}>Les achat</button>
+                        <button 
+                        className={Lesvente ? 'achat-button-active' : 'achat-button-inactive'}
+                        onClick={() =>{setLesachat(false);setLesvente(true)}}>Les vente</button>
+                      </div>
+                      {Lesachat && (
+                        <>
+                      <AchatOptions button={"Modifier"}/>
+                      </>)
+                      }
+                      {Lesvente  && (
+                        <>
+                      <AchatOptions button={"Modifier"}/>
+                      <AchatOptions button={"Modifier"}/>
+                      </>)
+                      }
+                    </div>
+
+                    <button
+                      className='achatAnuuler'
+                      onClick={() => sethistorique(false)}
+                    >
+                      Annuler
+                    </button>
+                  </div>
+
+                ):(
                   <div className='transaction-Bottom'>
                     <img src='/transactions/buttom.jpg' alt='imgbuttom' />
                     <button
@@ -352,7 +533,7 @@ const Chat_Page = () => {
                     </button>
                     <button
                       className='transaction-Bottom-button1'
-                      // onClick={() => setachat(true)}
+                      onClick={() => sethistorique(true)}
                     >
                       Votre historique
                     </button>
