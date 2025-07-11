@@ -216,6 +216,7 @@ flex-direction: column;
     padding: 20px;
   flex-wrap: wrap;
   max-width: 100%; 
+  z-index: 900;
 }
 
 
