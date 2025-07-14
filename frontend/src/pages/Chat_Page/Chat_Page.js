@@ -12,7 +12,7 @@ const Chat_Page = () => {
   const [vente, setvente] = useState(false);
   const [Lesvente, setLesvente] = useState(false);
   const [Lesachat, setLesachat] = useState(false);
-  const [conversation, setConversation] = useState(true);
+  const [conversation, setConversation] = useState(false);
   const [historique, sethistorique] = useState(false);
 
   return (

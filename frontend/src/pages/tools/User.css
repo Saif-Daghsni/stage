@@ -1,4 +1,7 @@
 .users-container{
+    position: relative; 
+    display: flex;
+    flex-direction: column;
     padding: 15px;
 }
 .input-wrapper {
@@ -26,4 +29,12 @@
 .users-buttom{
     width: 100%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  height: 480px;
+
+}
+
+.users-buttom::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }

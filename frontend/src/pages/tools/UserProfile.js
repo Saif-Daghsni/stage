@@ -1,11 +1,13 @@
-import React from "react";
+import React  from 'react';
+import PropTypes from 'prop-types';
 import "./UserProfile.css";
 
-const UserProfile = () => {
+const UserProfile = ({ id, selected, onClick }) => {
   return (
-    <div className="UserProfile">
+    <div className={selected ? 'UserProfile-inactive' : 'UserProfile-active'}
+      onClick={() => onClick(id)}>
       <div className="UserProfile-photo">
-        <div className="connected"></div>
+        {/* <div className="connected"></div> */}
         <img src="/Users/Avatar.png" alt="" />
       </div>
 
@@ -18,6 +20,11 @@ const UserProfile = () => {
       </div>
     </div>
   );
+};
+UserProfile.propTypes = {
+  id: PropTypes.any.isRequired,
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default UserProfile;
