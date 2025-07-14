@@ -6,6 +6,7 @@ import Consulter from "./Consulter";
 import PropTypes from 'prop-types';
 import Vente from "../tools/Vente";
 import { FaHandshake } from 'react-icons/fa';
+import Details from "./Details";
 
 const AchatOptions = (props) => {
   const [details, setdetails] = useState(false);
@@ -51,6 +52,7 @@ const AchatOptions = (props) => {
 
       {confirme ? (
         <div className="option-details-row-buttons">
+          <button onClick={() => setdetails(true)} className="option-details-Consulter-Details">Details</button>
           <button
             className="option-details-Consulter-Consulter"
             onClick={() => {
@@ -78,11 +80,9 @@ const AchatOptions = (props) => {
 
       {details  && <div className="overlay"></div>}
 
-      {details && (
-        <div className="option-details-details">
-          <button onClick={() => setdetails(false)}>go back</button>
-        </div>
-      )}
+      {details && (<>
+        <Details setdetails={setdetails}/>
+      </>     )}
 
       {modifier &&(
         

@@ -358,9 +358,6 @@ input[type="number"]::-webkit-outer-spin-button {
     border: 2px solid #E4E4E7;
     font-weight: 500;
     padding: 10px 6px 10px 8px;
-    border-radius: 8px;
-    border: 2px solid #E4E4E7;
-    font-weight: 500;
     font-size: 15px;
     
 }

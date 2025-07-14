@@ -97,22 +97,6 @@ button{
     font-size: 13px;
 }
 
-.option-details-Consulter-Details{
-    position:relative;
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 12.68px;
-    border: none;
-    background-color: #CFFAE2;
-    color: #16A34A;
-    font-weight: 600;
-    font-size: 12px;
-    align-self: flex-end;
-    margin-top: 5px;
-}
 
 
 
@@ -149,11 +133,29 @@ button{
   font-size: 12px;
 }
 
+.option-details-Consulter-Details{
+    position:relative;
+  bottom: 0;           
+  right: 0;          
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px;
+    border-radius: 12.68px;
+    border: none;
+    background-color: #CFFAE2;
+    color: #16A34A;
+    font-weight: 600;
+    font-size: 12px;
+    align-self: flex-end;
+    margin-right: 5px;
+}
 .option-details-details{
     
     position: fixed;
-    width: 50%;
-    height: 60%;
+    width: 30%;
     background-color: white;
     z-index: 999;
     top: 50%;
@@ -161,7 +163,6 @@ button{
     transform: translate(-50%, -50%);
     border-radius: 15px;
     box-shadow: 0 0 6px 5px rgba(0, 0, 0, 0.2);
-    padding: 20px;
     z-index: 55; 
 }
 

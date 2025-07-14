@@ -117,7 +117,7 @@ const Vente = (props) => {
   const [quantiteNego, setQuantiteNego] = useState(false);
   const [type, setType] = useState('');
   const [gamme, setGamme] = useState('');
-  const [publier, setPublier] = useState(true);
+  const [publier, setPublier] = useState(false);
 
 
   const handleChangeType = (option) => {
