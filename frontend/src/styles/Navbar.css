@@ -1,0 +1,261 @@
+/* Navbar container */
+.navbar {
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  font-size: 14px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Left section */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-path {
+  margin-left: 10px;
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.path-light {
+  color: #64748b;
+  font-weight: 400;
+}
+
+.path-bold {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.separator {
+  color: #94a3b8;
+  margin: 0 4px;
+}
+
+/* Right section */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* Trophy item */
+.trophy-icon {
+  color: #746D38;
+  font-size: 16px;
+  width: 20px;
+  height: 30px;
+}
+
+.item-label {
+  color: #475569;
+  font-weight: 500;
+}
+
+/* Timer item - disposition verticale */
+.timer-item {
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.timer-icon {
+  color: #3b82f6;
+  font-size: 16px;
+  margin-top: 2px;
+  height: 30px;
+  width: 40px;
+}
+
+.timer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.timer-label {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.timer-value {
+  color: #126296;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* Progress item */
+.progress-item {
+  align-items: center;
+  gap: 10px;
+}
+.prog{
+    display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.progress-value{
+  color: #3A371C;
+}
+
+.progress-donut {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-donut svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+.progress-donut svg circle:first-child {
+  stroke: #DAD39E;
+  stroke-width: 4;
+}
+
+.progress-donut svg circle:last-child {
+  stroke: #746D38;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.3s ease;
+}
+
+.progress-text {
+  color: #746D38;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-label {
+  color:#3A371C;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Events button */
+.events-icon {
+  color: #126296;
+  font-size: 16px;
+  margin-right: 5px;
+height: 20px;
+
+}
+
+.events-btn {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+}
+
+.events-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.events-btn:active {
+  background: #f3f4f6;
+  transform: translateY(1px);
+}
+
+/* Icons section */
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-icons .icon {
+  font-size: 18px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.navbar-icons .icon:hover {
+  color: #374151;
+}
+
+.notification-icon {
+  font-size: 17px;
+}
+
+.settings-icon {
+  font-size: 17px;
+}
+
+.user-icon {
+  font-size: 24px;
+  color: #1e293b;
+}
+
+.user-icon:hover {
+  color: #0f172a;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0 16px;
+  }
+  
+  .navbar-right {
+    gap: 16px;
+  }
+  
+  .timer-content {
+    display: none;
+  }
+  
+  .timer-item {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-item:not(:last-child) {
+    display: none;
+  }
+  
+  .navbar-right {
+    gap: 12px;
+  }
+}
