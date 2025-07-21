@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import UserProfile from "./UserProfile" ;
 const User = () => {
   const [selected, setselected] = useState(false);
-  const users = Array.from({ length: 12 }, (_, i) => i + 1);
+  const users = Array.from({ length: 10 }, (_, i) => i + 1);
   return (
     <div className="users-container">
       <div className="input-wrapper">
@@ -13,6 +13,13 @@ const User = () => {
       </div>
       <div className="users-buttom">
          {users.map((id) => (
+          <UserProfile
+            key={id}
+            id={id}
+            selected={selected === id}
+            onClick={setselected}
+          />
+        ))}{users.map((id) => (
           <UserProfile
             key={id}
             id={id}

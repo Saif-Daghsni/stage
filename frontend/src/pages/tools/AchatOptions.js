@@ -3,16 +3,21 @@ import "./AchatOptions.css";
 // eslint-disable-next-line no-unused-vars
 import { FiCheck } from "react-icons/fi";
 import Consulter from "./Consulter";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Vente from "../tools/Vente";
-import { FaHandshake } from 'react-icons/fa';
+import { FaHandshake } from "react-icons/fa";
 import Details from "./Details";
+import { BiShareAlt } from "react-icons/bi";
+import Share from "./Share";
+import Supprimer from "./Supprimer";
 
 const AchatOptions = (props) => {
   const [details, setdetails] = useState(false);
   const [consulter, setConsulter] = useState(false);
   const [confirme, setConfirme] = useState(true);
   const [modifier, setmodifier] = useState(false);
+  const [recherche, setrecherche] = useState(false);
+  const [supprimer, setsupprimer] = useState(false);
 
   return (
     <div className="option">
@@ -28,31 +33,69 @@ const AchatOptions = (props) => {
 
           <div className="option-details-title-container">
             <div className="option-details-title-container-title">
-              
-              <label className="option-details-row-label">Type:</label>
-              <label className="option-details-row-label">Gamme:</label>
-              <label className="option-details-row-label">Quantité:</label>
-              <label className="option-details-row-label">Prix:</label>
+              <label className="option-details-row-label">
+                <p>Type</p>
+                <p>:</p>
+              </label>
+              <label className="option-details-row-label">
+                <p>Gamme</p>
+                <p>:</p>
+              </label>
+              <label className="option-details-row-label">
+                <p>Quantité</p>
+                <p>:</p>
+              </label>
+              <label className="option-details-row-label">
+                <p>Prix</p>
+                <p>:</p>
+              </label>
             </div>
             <div className="option-details-title-container-values">
-            <a>Matiere premiers</a>
-            <a>Moyenne gamme</a>
-            <div><a>40</a><FaHandshake style={{ color: '#166534' }} size={20} /></div>
-            <div><a>200.000 dt</a><FaHandshake style={{ color: '#B91C1C' }} size={20} /></div>
+              <a>Matiere premiers</a>
+              <a>Moyenne gamme</a>
+              <div>
+                <a>40</a>
+                <FaHandshake style={{ color: "#166534" }} size={20} />
+              </div>
+              <div>
+                <a>200.000 dt</a>
+                <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+              </div>
             </div>
           </div>
         </div>
       </div>
-            {/* <p className='option-details-nego'> Négociable</p> */}
-
-            {/* <p className='option-details-nego'> Négociable</p> */}
       {consulter && (
         <Consulter setConfirme={setConfirme} setConsulter={setConsulter} />
       )}
 
       {confirme ? (
         <div className="option-details-row-buttons">
-          <button onClick={() => setdetails(true)} className="option-details-Consulter-Details">Details</button>
+          {props.button == "Modifier" && (
+            <>
+              <button
+                className="option-details-Consulter-share"
+                onClick={() => setrecherche(true)}
+              >
+                <BiShareAlt size={13} />
+              </button>
+              <button
+                className="option-details-Consulter-supprimer"
+                onClick={() => {
+                  setsupprimer(true);
+                  console.log("Supprime clicked");
+                }}
+              >
+                Supprimer
+              </button>
+            </>
+          )}
+          <button
+            onClick={() => setdetails(true)}
+            className="option-details-Consulter-Details"
+          >
+            Details
+          </button>
           <button
             className="option-details-Consulter-Consulter"
             onClick={() => {
@@ -78,22 +121,33 @@ const AchatOptions = (props) => {
         </div>
       )}
 
-      {details  && <div className="overlay"></div>}
+      {details && <div className="overlay"></div>}
 
-      {details && (<>
-        <Details setdetails={setdetails}/>
-      </>     )}
-
-      {modifier &&(
-        
-                          <>
-                            <Vente
-                            title={"Modifier"}
-                            confirme={"Mettre à jour "}
-                            setmodifier={setmodifier}
-                            />
-                          </>
+      {details && (
+        <>
+          <Details setdetails={setdetails} />
+        </>
       )}
+
+      {recherche && <div className="overlay"></div>}
+
+      {recherche && (
+        <>
+          <Share setrecherche={setrecherche} />
+        </>
+      )}
+
+      {modifier && (
+        <>
+          <Vente
+            title={"Modifier"}
+            confirme={"Mettre à jour "}
+            setmodifier={setmodifier}
+          />
+        </>
+      )}
+
+      {supprimer && <Supprimer setsupprimer={setsupprimer} />}
     </div>
   );
 };

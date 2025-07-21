@@ -1,19 +1,25 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Inter, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
 }
 
-
-button{
-    cursor: pointer;
-    font-family: Inter, sans-serif;
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent entire page scrolling */
+}
+button {
+  cursor: pointer;
+  font-family: Inter, sans-serif;
 }
 
-label{
-    
-    font-family: Inter, sans-serif;
+label {
+  font-family: Inter, sans-serif;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -22,352 +28,348 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.topBar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .navBar {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    display: flex;
-    width: 60px;
-    height: 100%;
-    background-color: #f8f9fa;
-    border-right: 1px solid #dee2e6;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  display: flex;
+  width: 60px;
+  height: 100%;
+  background-color: #f8f9fa;
+  border-right: 1px solid #dee2e6;
 }
 
 .container {
   position: fixed;
-  top: 60px;            
-  left: 60px;            
-  right: 0;              
-  bottom: 0;            
-  padding: 20px ;    
+  top: 60px;
+  left: 60px;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
 }
 
-.under-container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+.under-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
-.logo{
-    font-size: 24px;
-    font-weight: bold;
-    font-family: Inter, sans-serif;
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Inter, sans-serif;
 }
 
-.divs{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
+.divs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Critical - prevents container from growing */
+  min-height: 0; /* Allows flex children to shrink */
 }
-
 
 /***********************************--users--*******************************************/
-.users{
-    position: relative;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow-y: auto;
-    border-radius: 14px;
-    border: 1px solid #D4D4D8;
-    flex-direction: column;
+.users {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  border-radius: 14px;
+  border: 1px solid #d4d4d8;
+  flex-direction: column;
 }
-
+.users,
+.chat {
+  min-height: 0; /* Allows content to be scrollable */
+  height: 100%; /* Take full height available */
+  overflow: hidden; /* Hide overflow */
+}
 .users::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
 /*******padding: 10px;****************************--users--*******************************************/
 
-
 /***********************************--chat--*******************************************/
-.chat{
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow-y: auto;
-    border-radius: 14px;
-    border: 1px solid #D4D4D8;
-    margin-left: 20px;
-    margin-right: 20px;
+.chat {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-radius: 14px;
+  border: 1px solid #d4d4d8;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-.chat-top{
-    top: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #E4E4E7;
-    height: 60px;
-    border-radius: 14px;
-
+.chat-top {
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #e4e4e7;
+  height: 60px;
+  border-radius: 14px;
 }
 
-.chat-container{
-    padding: 20px;
-    height: 100%;
-    position: relative;
+.chat-container {
+  padding: 20px;
+  height: 100%;
+  position: relative;
 }
 
-.chat-bottom{
-    position: absolute; 
-    bottom: 10px;          
-    left: 20px;            
-    right: 20px;           
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 10px;
-    border-radius: 14px;
-    border: 1px solid #D4D4D8;
+.chat-bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  border-radius: 14px;
+  border: 1px solid #d4d4d8;
 }
 
-.chat-input{
-    height: 40px;
-    width: 100%;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 13px;
-    font-family: Inter, sans-serif;
-    
+.chat-input {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 13px;
+  font-family: Inter, sans-serif;
 }
 /***********************************--chat--*******************************************/
-
-
-
 
 /***********************************--transaction--*******************************************/
-.transaction{
-    position: relative;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    border-radius: 14px;
-    border: 1px solid #D4D4D8;
+.transaction {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #d4d4d8;
 }
-.transaction-top{
-    top: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #CDE3F2;
-    height: 60px;
-    border-radius: 14px;
-}
-
-.transaction-label{
-    font-size: 15px;
-    font-weight: 700;
-    font-family: Inter, sans-serif;
+.transaction-top {
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #cde3f2;
+  height: 60px;
+  border-radius: 14px;
 }
 
-.transaction-button{
-    width: 35px;
-    height: 35px;
-    border-radius: 8px;
-    background-color: #E6FAFE;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.transaction-label {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: Inter, sans-serif;
 }
 
-.transaction-Bottom{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
+.transaction-button {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background-color: #e6fafe;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.transaction-Bottom-button1{
-    width: 75%;
-    height: 50px;
-    border-radius: 8px;
-    background-color: #167ABC;
-    border: none;
-    margin-top: 10px;
-    color: white;
-    font-size: 15px;
-    font-weight: 500;
-    font-family: Inter, sans-serif;
+.transaction-Bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.transaction-Bottom-button1 {
+  width: 75%;
+  height: 50px;
+  border-radius: 8px;
+  background-color: #167abc;
+  border: none;
+  margin-top: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Inter, sans-serif;
 }
 /*--------Vente--------*/
-.transaction-Bottom-vente{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+.transaction-Bottom-vente {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
   flex-wrap: wrap;
-  max-width: 100%; 
+  max-width: 100%;
   z-index: 900;
 }
 
-
-.vente-title{
-    font-size: 18px;
-    font-weight: 550;
-    font-family: Inter, sans-serif;
-    color: #167ABC ;
+.vente-title {
+  font-size: 18px;
+  font-weight: 550;
+  font-family: Inter, sans-serif;
+  color: #167abc;
 }
 
-.vente-label{
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: 550;
-    font-family: Inter, sans-serif;
+.vente-label {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 550;
+  font-family: Inter, sans-serif;
 }
-.vente-input{
-    margin-top: 5px;
-    outline: none;
-    font-family: Inter, sans-serif;
-    padding: 6px;
-    padding-left: 8px;
-    border-radius: 8px;
-    border: 2px solid #E4E4E7;
-    font-weight: 500;
+.vente-input {
+  margin-top: 5px;
+  outline: none;
+  font-family: Inter, sans-serif;
+  padding: 6px;
+  padding-left: 8px;
+  border-radius: 8px;
+  border: 2px solid #e4e4e7;
+  font-weight: 500;
 }
 /*****************************************/
-.new-div-input{
-    margin-top: 5px;
-    outline: none;
-    font-family: Inter, sans-serif;
-    padding-right: 8px;
-    border-radius: 8px;
-    border: 2px solid #E4E4E7;
-    font-weight: 500;
-    height: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.new-div-input {
+  margin-top: 5px;
+  outline: none;
+  font-family: Inter, sans-serif;
+  padding-right: 8px;
+  border-radius: 8px;
+  border: 2px solid #e4e4e7;
+  font-weight: 500;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .vente-input::placeholder {
-  color: #E4E4E7;
+  color: #e4e4e7;
 }
-.new-vente-input{
-    height: 100%;
-    width: 100%;
-    border: none;
-    outline: none;
-    border-radius: 8px;
-    padding-left: 10px;
+.new-vente-input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding-left: 10px;
 }
 .new-vente-input::placeholder {
-  color: #E4E4E7;
+  color: #e4e4e7;
 }
 .new-vente-input::-webkit-inner-spin-button,
-.new-vente-input::-webkit-outer-spin-button
-{
+.new-vente-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.the-button{
-    width: 23px;
-    height: 80%;
-    background-color: white;
-    border-radius: 5px;
-    border: 2px solid #D4D4D8;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    font-weight: 600;
-    color: #D4D4D8;
-    margin-left: 5px;
-    display: inline-flex; 
-    justify-content: center; 
-    align-items: center;     
+.the-button {
+  width: 23px;
+  height: 80%;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid #d4d4d8;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #d4d4d8;
+  margin-left: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.transaction-Bottom-vente-buttons{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-top: 20px;
+.transaction-Bottom-vente-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 20px;
 }
 
-.transaction-Bottom-vente-buttons1{
-    flex:1.2;
-    padding-left: 6px;
-    padding: 8px;
-    border-radius: 12.68px;
-    border: none;
-    background-color: #FEE1EA;
-    color: #F31260;
-    font-weight: 600;
-    font-size: 13px;
-    font-family: Inter, sans-serif;
+.transaction-Bottom-vente-buttons1 {
+  flex: 1.2;
+  padding-left: 6px;
+  padding: 8px;
+  border-radius: 12.68px;
+  border: none;
+  background-color: #fee1ea;
+  color: #f31260;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: Inter, sans-serif;
 }
-.transaction-Bottom-vente-buttons2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    padding: 8px;
-    border-radius: 12.68px;
-    border: none;
-    background-color: #CDE3F2;
-    color: #167ABC;
-    font-weight: 600;
-    margin-left: 10px;
-    font-size: 13px;
-    font-family: Inter, sans-serif;
-}
-
-.Pricerow{
-    display: flex;
-    flex-direction: row;
-    /*align-items: center;*/
+.transaction-Bottom-vente-buttons2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 8px;
+  border-radius: 12.68px;
+  border: none;
+  background-color: #cde3f2;
+  color: #167abc;
+  font-weight: 600;
+  margin-left: 10px;
+  font-size: 13px;
+  font-family: Inter, sans-serif;
 }
 
-.prixdiv{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    margin-left: 10px;
-  max-width: 100%; 
+.Pricerow {
+  display: flex;
+  flex-direction: row;
+  /*align-items: center;*/
 }
 
-.vente-input-prix{
-  flex:1; 
-  min-width: 0;  
-    margin-top: 5px;
-    outline: none;
-    font-family: Inter, sans-serif;
+.prixdiv {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 10px;
+  max-width: 100%;
+}
 
-    padding: 6px;
-    padding-left: 8px;
-    border-radius: 8px;
-    border: 2px solid #E4E4E7;
-    font-weight: 500;
-    padding: 10px 6px 10px 8px;
-    font-size: 15px;
-    
+.vente-input-prix {
+  flex: 1;
+  min-width: 0;
+  margin-top: 5px;
+  outline: none;
+  font-family: Inter, sans-serif;
+
+  padding: 6px;
+  padding-left: 8px;
+  border-radius: 8px;
+  border: 2px solid #e4e4e7;
+  font-weight: 500;
+  padding: 10px 6px 10px 8px;
+  font-size: 15px;
 }
 .vente-input-prix::placeholder {
-  color: #E4E4E7;
+  color: #e4e4e7;
 }
 .custom-checkbox {
   display: flex;
@@ -391,20 +393,20 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .custom-checkbox .checkmark {
-  display: inline-block;  
+  display: inline-block;
   width: 20px;
   height: 20px;
   border-radius: 6px;
-  border: 2px solid #167ABC;
+  border: 2px solid #167abc;
   position: relative;
-  flex-shrink: 0;         
-  min-width: 20px;       
+  flex-shrink: 0;
+  min-width: 20px;
   min-height: 20px;
-  margin-right: 8px;      
+  margin-right: 8px;
 }
 .custom-checkbox input:checked + .checkmark {
-  background-color: #167ABC; 
-  border-color: #167ABC; 
+  background-color: #167abc;
+  border-color: #167abc;
 }
 
 .custom-checkbox input:checked + .checkmark::after {
@@ -420,28 +422,16 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .Prixlabel {
-    font-size: 12px;
-    font-weight: 550;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-size: 12px;
+  font-weight: 550;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /******la confirmation*****/
 
-.confirmation{
-    width: 90%;
-    height: 100%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index:20 ;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    flex-direction: column;
-}
+
 /*
 
   position: absolute;
@@ -455,137 +445,120 @@ input[type="number"]::-webkit-outer-spin-button {
   z-index: 1000; 
   */
 
-.confirmation-container{
-    width: 100%;
-    height: 30%;
-    background-color: white;
-    border-radius: 0px 0px 10px 10px;
-    flex-direction: column;
-    display:flex;
-    padding: 10px;
-    justify-content: center;
+
+
+
+
+.nego {
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.confirmation-label{
-    font-size: 14px;
-    font-weight: 550;
-    font-family: Inter, sans-serif;
-    margin-bottom: 12px;
-    margin-right: 5px;
-    color: #167ABC;
+.Pasnego {
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
 }
-
-.nego{
-    color: #16A34A ;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.Pasnego{
-    
-    color: #DC2626  ;
-    font-size: 12px;
-    font-weight: 600;
-}
-.Pricerow1{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+.Pricerow1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 .overlay {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10; 
+  z-index: 10;
 }
-
 
 /*******************debut achat*****************************/
 
-.achat{
-    height: 485px;
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column; 
-    position: relative; 
+.achat {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 0;  
 }
 
-.achatoptions{
-    flex: 1;
-    overflow-y: auto;
+.achatoptions {
+  flex: 1 1 auto;    
+  overflow-y: auto;  
+  min-height: 0;     
 }
+
 .achatoptions::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none; 
 }
 
-
-.achatAnuuler{
-    padding-left: 6px;
-    padding: 8px;
-    border-radius: 12.68px;
-    border: none;
-    background-color: #FEE1EA;
-    color: #F31260;
-    font-weight: 600;
-    font-size: 13px;
-    width: 100%;
-    bottom: 0;
-
+.achatAnuuler {
+  flex: 0 0 auto;   
+  margin-top: 10px; 
+  padding: 8px;
+  width: 100%;
+  background: #fee1ea;
+  color: #f31260;
+  font-weight: 600;
+  font-size: 13px;
+  border: none;
+  border-radius: 12.68px;
 }
-
+.achat,
+.achatoptions {
+  min-height: 0;
+}
 
 .achat-vente-buttons {
-    display: flex;
-    width: 100%;
-    margin-bottom: 15px;
-    gap: 10px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+  gap: 10px;
 }
 
 .achat-button {
-    flex: 1;
-    height: 30px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 500;
-    font-size: 13px;
-    cursor: pointer;
-    background-color: #167ABC;
-    color: white;
+  flex: 1;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: #167abc;
+  color: white;
 }
 
-.achat-button-inactive{
-    flex: 1;
-    height: 30px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 500;
-    font-size: 13px;
-    cursor: pointer;
-    background-color: #CDE3F2;
-    color: #167ABC;
+.achat-button-inactive {
+  flex: 1;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: #cde3f2;
+  color: #167abc;
 }
-.achat-button-active{
-    flex: 1;
-    height: 30px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 500;
-    font-size: 13px;
-    cursor: pointer;
-    background-color: #167ABC;
-    color: white;
-
+.achat-button-active {
+  flex: 1;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: #167abc;
+  color: white;
 }
 
 /*******************fin achat*****************************/
-
 
 /***********************************--transaction--*******************************************/

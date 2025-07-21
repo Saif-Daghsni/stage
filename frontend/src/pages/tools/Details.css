@@ -40,8 +40,8 @@
 .type-line {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* optional: align vertically */
-  width: 100%; /* or any fixed width you want */
+  align-items: center; 
+  width: 100%; 
 }
 
 .type-line h5{

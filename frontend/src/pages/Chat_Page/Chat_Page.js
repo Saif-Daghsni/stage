@@ -3,7 +3,7 @@ import './Chat_Page.css';
 import AchatOptions from '../tools/AchatOptions';
 import Vente from "../tools/Vente";
 import User from '../tools/User';
-
+import Chat from '../tools/chat/Chat'
 
 const Chat_Page = () => {
 
@@ -11,7 +11,7 @@ const Chat_Page = () => {
   const [achat, setachat] = useState(false);
   const [vente, setvente] = useState(false);
   const [Lesvente, setLesvente] = useState(false);
-  const [Lesachat, setLesachat] = useState(false);
+  const [Lesachat, setLesachat] = useState(true);
   const [conversation, setConversation] = useState(false);
   const [historique, sethistorique] = useState(false);
 
@@ -31,19 +31,7 @@ const Chat_Page = () => {
               </div>
 
               <div className='chat'>
-                <div className='chat-top'>
-                  <label className='transaction-label'>User</label>
-                </div>
-
-                <div className='chat-container'>
-                  <div className='chat-bottom'>
-                    <input
-                      className='chat-input'
-                      type='text'
-                      placeholder='Enter a prompt here'
-                    />
-                  </div>
-                </div>
+                <Chat />
               </div>
 
               {/* debut  transaction */}
@@ -79,6 +67,7 @@ const Chat_Page = () => {
                         <button className='achat-button' onClick={() =>setvente(true)}>Besoin de vente</button>
                       </div>
 
+                      <AchatOptions button={"Consulter"}/>
                       <AchatOptions button={"Consulter"}/>
                       <AchatOptions button={"Consulter"}/>
                       <AchatOptions button={"Consulter"}/>

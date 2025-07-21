@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 //import { FiPlus, FiMinus } from 'react-icons/fi';
-import Select from 'react-select';
-import PropTypes from 'prop-types';
+import Select from "react-select";
+import PropTypes from "prop-types";
 import "./Vente.css";
+import { FaHandshake } from "react-icons/fa";
 
 /*
 function Input_vente(props) {
@@ -54,71 +55,69 @@ function Input_vente(props) {
 const customStyles = {
   control: (provided) => ({
     ...provided,
-    height: '43px',
-    marginTop: '5px',
-    outline: 'none',
-    paddingLeft: '8px',
-    paddingRight: '8px',
-    borderRadius: '8px',
-    border: '2px solid #E4E4E7',
+    height: "43px",
+    marginTop: "5px",
+    outline: "none",
+    paddingLeft: "8px",
+    paddingRight: "8px",
+    borderRadius: "8px",
+    border: "2px solid #E4E4E7",
     fontWeight: 500,
-    fontSize: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    boxShadow: 'none',
-    '&:hover': {
-      borderColor: 'none',
+    fontSize: "16px",
+    display: "flex",
+    alignItems: "center",
+    boxShadow: "none",
+    "&:hover": {
+      borderColor: "none",
     },
   }),
   option: (provided, state) => ({
     ...provided,
     backgroundColor: state.isSelected
-      ? '#CDE3F2'
+      ? "#CDE3F2"
       : state.isFocused
-      ? '#CDE3F2'
-      : '#fff',
-    color: '#000',
-    borderRadius: '5px',
-    cursor: 'pointer',
+        ? "#CDE3F2"
+        : "#fff",
+    color: "#000",
+    borderRadius: "5px",
+    cursor: "pointer",
   }),
   placeholder: (provided) => ({
     ...provided,
     margin: 0,
     padding: 0,
-    lineHeight: '36px',
-    color: '#E4E4E7 !important',
+    lineHeight: "36px",
+    color: "#E4E4E7 !important",
   }),
   input: (provided) => ({
     ...provided,
     margin: 0,
     padding: 0,
-    lineHeight: '36px',
+    lineHeight: "36px",
   }),
 };
 
 const gammeOptions = [
-  { value: 'Entrée de gamme', label: 'Entrée de gamme' },
-  { value: 'Moyenne gamme', label: 'Moyenne gamme' },
-  { value: 'Haut gamme', label: 'Haut gamme' },
+  { value: "Entrée de gamme", label: "Entrée de gamme" },
+  { value: "Moyenne gamme", label: "Moyenne gamme" },
+  { value: "Haut gamme", label: "Haut gamme" },
 ];
 
 const typeoptions = [
-  { value: 'Matières premières', label: 'Matières premières' },
-  { value: 'Emballage', label: 'Emballage' },
-  { value: 'Produits fini', label: 'Produits fini' },
-  { value: 'Machines', label: 'Machines' },
+  { value: "Matières premières", label: "Matières premières" },
+  { value: "Emballage", label: "Emballage" },
+  { value: "Produits fini", label: "Produits fini" },
+  { value: "Machines", label: "Machines" },
 ];
 
 const Vente = (props) => {
-    
   const [prixNego, setPrixNego] = useState(false);
-  const [quantite, setQuantite] = useState('');
-  const [prix, setPrix] = useState('');
+  const [quantite, setQuantite] = useState("");
+  const [prix, setPrix] = useState("");
   const [quantiteNego, setQuantiteNego] = useState(false);
-  const [type, setType] = useState('');
-  const [gamme, setGamme] = useState('');
-  const [publier, setPublier] = useState(false);
-
+  const [type, setType] = useState("");
+  const [gamme, setGamme] = useState("");
+  const [publier, setPublier] = useState(true);
 
   const handleChangeType = (option) => {
     setType(option);
@@ -129,88 +128,88 @@ const Vente = (props) => {
   };
 
   return (
-    <div className='transaction-Bottom-vente'>
-      <label className='vente-title'>{props.title}</label>
+    <div className="transaction-Bottom-vente">
+      <label className="vente-title">{props.title}</label>
 
-      <label className='vente-label'>Type</label>
+      <label className="vente-label">Type</label>
       <Select
         options={typeoptions}
         value={type}
         onChange={handleChangeType}
-        name='type'
+        name="type"
         styles={customStyles}
-        placeholder='Select a type'
+        placeholder="Select a type"
       />
 
-      <label className='vente-label'>Gamme</label>
+      <label className="vente-label">Gamme</label>
       <Select
         options={gammeOptions}
         value={gamme}
         onChange={handleChangeGamme}
-        name='gamme'
+        name="gamme"
         styles={customStyles}
-        placeholder='Select a gamme'
+        placeholder="Select a gamme"
       />
 
       {/* debut Quantité & Prix */}
-      <div className='quantite-prix-block'>
-        <label className='vente-label'>Quantité</label>
-        <div className='Pricerow'>
+      <div className="quantite-prix-block">
+        <label className="vente-label">Quantité</label>
+        <div className="Pricerow">
           <input
-            className='vente-input-prix'
-            type='number'
-            placeholder='Quantité'
+            className="vente-input-prix"
+            type="number"
+            placeholder="Quantité"
             onChange={(e) => setQuantite(e.target.value)}
           />
-          <div className='prixdiv'>
-            <label className='custom-checkbox'>
-              <input type='checkbox' className='prixcheckbox' name='agree' />
+          <div className="prixdiv">
+            <label className="custom-checkbox">
+              <input type="checkbox" className="prixcheckbox" name="agree" />
               <span
-                className='checkmark'
+                className="checkmark"
                 onClick={() => setQuantiteNego(!quantiteNego)}
               ></span>
-              <span className='Prixlabel'>Négociable</span>
+              <span className="Prixlabel">Négociable</span>
             </label>
           </div>
         </div>
 
-        <label className='vente-label'>Prix</label>
-        <div className='Pricerow'>
+        <label className="vente-label">Prix</label>
+        <div className="Pricerow">
           <input
-            className='vente-input-prix'
-            type='number'
-            placeholder='Prix'
+            className="vente-input-prix"
+            type="number"
+            placeholder="Prix"
             onChange={(e) => setPrix(e.target.value)}
           />
-          <div className='prixdiv'>
-            <label className='custom-checkbox'>
-              <input type='checkbox' className='prixcheckbox' name='agree' />
+          <div className="prixdiv">
+            <label className="custom-checkbox">
+              <input type="checkbox" className="prixcheckbox" name="agree" />
               <span
-                className='checkmark'
+                className="checkmark"
                 onClick={() => setPrixNego(!prixNego)}
               ></span>
-              <span className='Prixlabel'>Négociable</span>
+              <span className="Prixlabel">Négociable</span>
             </label>
           </div>
         </div>
       </div>
       {/* fin Quantité & Prix */}
 
-      <div className='transaction-Bottom-vente-buttons'>
+      <div className="transaction-Bottom-vente-buttons">
         <button
-          className='transaction-Bottom-vente-buttons1'
+          className="transaction-Bottom-vente-buttons1"
           onClick={() => {
-              if (props.title === "Vente" || props.title === "Achat") {
-                props.setvente(false);
-              } else if (props.title === "Modifier") {
-                props.setmodifier(false);
-              }
-            }}
+            if (props.title === "Vente" || props.title === "Achat") {
+              props.setvente(false);
+            } else if (props.title === "Modifier") {
+              props.setmodifier(false);
+            }
+          }}
         >
           Annuler
         </button>
         <button
-          className='transaction-Bottom-vente-buttons2'
+          className="transaction-Bottom-vente-buttons2"
           onClick={() => setPublier(!publier)}
         >
           Publier
@@ -219,56 +218,61 @@ const Vente = (props) => {
 
       {/* debut confirmation */}
 
-      {publier && <div className='overlay'></div>}
+      {publier && <div className="overlay"></div>}
 
       {publier && (
-        <div className='confirmation'>
-            <div className='confirmation-container-top'>Votre information</div>
-          <div className='confirmation-container'>
-            <div className='Pricerow'>
-              <label className='confirmation-label'>Type :</label>
-              <a>{type ? type.label : ''}</a>
-            </div>
-
-            <div className='Pricerow'>
-              <label className='confirmation-label'>Gamme :</label>
-              <a>{gamme ? gamme.label : ''}</a>
-            </div>
-
-            <div className='Pricerow1'>
-              <div className='Pricerow'>
-                <label className='confirmation-label'>
-                  Quantité :
+        <div className="confirmation">
+          <div className="confirmation-container-top">Votre information</div>
+          <div className="confirmation-container">
+            <div className="Pricerow">
+              <div className="confirmation-title">
+                <label className="confirmation-label">
+                  <p>Type</p>
+                  <p>:</p>
                 </label>
-                <a>{quantite}</a>
+                <label className="confirmation-label">
+                  <p>Gamme</p>
+                  <p>:</p>
+                </label>
+                <label className="confirmation-label">
+                  <p>Quantité</p>
+                  <p>:</p>
+                </label>
+                <label className="confirmation-label">
+                  <p>Prix</p>
+                  <p>:</p>
+                </label>
               </div>
-              {quantiteNego ? (
-                <a className='nego'>Négociable</a>
-              ) : (
-                <a className='Pasnego'>Pas négociable</a>
-              )}
+              <div className="confirmation-values">
+                <a className="confirmation-values-a">{type ? type.label : 'Sélectionnez un type'}</a>
+                <a className="confirmation-values-a">{gamme ? gamme.label : 'Sélectionnez une gamme'}</a>
+                <div>
+                  <a className="confirmation-values-a">{quantite ? quantite : 'Vide'}</a>
+                  {quantiteNego ? (
+                    <FaHandshake style={{ color: "#166534" }} size={20} />
+                  ) : (
+                    <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+                  )}
+                </div>
+                <div>
+                  <a className="confirmation-values-a">{prix ? prix : 'Vide'}{prix ? 'dt' : ''}</a>{" "}
+                  {prixNego ? (
+                    <FaHandshake style={{ color: "#166534" }} size={20} />
+                  ) : (
+                    <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+                  )}
+                </div>
+              </div>
             </div>
 
-            <div className='Pricerow1'>
-              <div className='Pricerow'>
-                <label className='confirmation-label'>Prix :</label>
-                <a>{prix} dt</a>
-              </div>
-              {prixNego ? (
-                <a className='nego'>Négociable</a>
-              ) : (
-                <a className='Pasnego'>Pas négociable</a>
-              )}
-            </div>
-
-            <div className='Pricerow'>
+            <div className="Pricerow">
               <button
-                className='transaction-Bottom-vente-buttons1'
+                className="transaction-Bottom-vente-buttons1"
                 onClick={() => setPublier(!publier)}
               >
                 cancel
               </button>
-              <button className='transaction-Bottom-vente-buttons2'>
+              <button className="transaction-Bottom-vente-buttons2">
                 confirme
               </button>
             </div>
@@ -278,8 +282,8 @@ const Vente = (props) => {
 
       {/* Fin confirmation */}
     </div>
-  )
-}
+  );
+};
 
 Vente.propTypes = {
   setvente: PropTypes.func.isRequired,
@@ -289,4 +293,3 @@ Vente.propTypes = {
 };
 
 export default Vente;
-
