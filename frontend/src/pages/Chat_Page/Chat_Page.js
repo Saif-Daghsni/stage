@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Chat_Page.css";
 import AchatOptions from "../tools/Transactions/AchatOptions";
 import Vente from "../tools/Transactions/Vente";
@@ -12,7 +12,29 @@ const Chat_Page = () => {
   const [Lesachat, setLesachat] = useState(true);
   const [conversation, setConversation] = useState(false);
   const [historique, sethistorique] = useState(false);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
 
+    fetch("http://localhost:5000/me", {
+      method: "GET",
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched:", data);
+        setUser(data);
+      })
+      .catch((err) => console.error("Error fetching user:", err));
+  }, []);
+
+ if(!user) {
+  let loading = <div className="loading">Loading...</div>;
+  return loading;
+  }
   return (
     <Layout>
       <div>
@@ -25,7 +47,7 @@ const Chat_Page = () => {
 
               <div className="divs">
                 <div className="users">
-                  <User />
+                  {user && <User user={user}/>}
                 </div>
 
                 <div className="chat">

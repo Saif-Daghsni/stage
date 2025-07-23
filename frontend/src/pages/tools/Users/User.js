@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./User.css";
 import { FaSearch } from "react-icons/fa";
 import UserProfile from "./UserProfile";
-const User = () => {
-  const [selected, setselected] = useState(false);
 
+const User = (props) => {
+  const [selected, setselected] = useState(false);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -28,16 +28,21 @@ const User = () => {
         <input type="text" className="user-input" placeholder="Recherche" />
       </div>
       <div className="users-buttom">
-        {
-        users.map((user) => (
-          <UserProfile
-            key={user._id}
-            id={user._id}
-            selected={selected === user._id}
-            onClick={() => setselected(user._id)}
-            name={user.name}
-          />
-        ))}
+        {users.map((user) => {
+          if (props.user._id === user._id) {
+            console.log("❌ User with same ID found:", user._id);
+            return null;
+          }
+          return (
+            <UserProfile
+              key={user._id}
+              id={user._id}
+              selected={selected === user._id}
+              onClick={() => setselected(user._id)}
+              name={user.name}
+            />
+          );
+        })}
       </div>
     </div>
   );
