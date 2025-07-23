@@ -1,0 +1,29 @@
+.SecondUser {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.SecondUser-message {
+  width: 50%;
+  background-color: #E4E4E7;
+  padding: 5px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.SecondUser-message p{
+    color: black;
+    font-size: 14px;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.SecondUser-bottom {
+  font-size: 10px;
+  font-weight: 100;
+  color: black;
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+}

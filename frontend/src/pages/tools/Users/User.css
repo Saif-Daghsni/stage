@@ -1,0 +1,41 @@
+.users-container{
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    height: 100%;
+}
+.input-wrapper {
+  position: relative;
+}
+.user-input{
+    width: 100%;
+    border-radius: 20px;
+    padding-left: 35px;
+    height: 35px;
+    outline: none;
+    border: none;
+    background-color: #F4F4F5 ;
+    color: #71717A;
+
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #9ca3af; /* soft grey for icon */
+}
+
+.users-buttom{
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  height: 100%;
+
+}
+
+ .users-buttom::-webkit-scrollbar {
+  display: none; 
+} 

@@ -9,7 +9,7 @@ import {
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-
+import Chat_Page from "./pages/Chat_Page/Chat_Page";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -37,28 +37,18 @@ function App() {
 
   return (
     <div className="App">
-
       <div className="content">
         <Routes>
           {/* Page de connexion */}
           <Route
             path="/login"
-            element={
-              
-                <Login setIsAuthenticated={setIsAuthenticated} />
-              
-            }
+            element={<Login setIsAuthenticated={setIsAuthenticated} />}
           />
 
           {/* Page d'inscription */}
-          <Route
-            path="/signup"
-            element={
-              
-                <Signup />
-              
-            }
-          />
+          <Route path="/signup" element={<Signup />} />
+          {/* Chat page */}
+        <Route path="/chat" element={<Chat_Page />} />
 
           {/* Pages protégées */}
           <Route
@@ -69,7 +59,7 @@ function App() {
               </PrivateRoute>
             }
           />
-        
+
           {/* Redirection par défaut selon authentification */}
           <Route
             path="/"
