@@ -4,53 +4,7 @@ import Select from "react-select";
 import PropTypes from "prop-types";
 import "./Vente.css";
 import { FaHandshake } from "react-icons/fa";
-
-/*
-function Input_vente(props) {
-  const [value, setValue] = useState('');
-
-  const handleChange = (e) => {
-    const val = e.target.value;
-    if (val === '' || /^[0-9]+$/.test(val)) {
-      setValue(val);
-    }
-  };
-
-  const increment = () => {
-    setValue((prev) => {
-      const num = parseInt(prev) || 0;
-      return num + 1;
-    });
-  };
-
-  const decrement = () => {
-    setValue((prev) => {
-      const num = parseInt(prev) || 0;
-      return num > 0 ? num - 1 : 0;
-    });
-  };
-
-  return (
-    <div className='new-div-input'>
-      <input
-        className='new-vente-input'
-        // eslint-disable-next-line react/prop-types
-        placeholder={props.name}
-        type='text'
-        value={value}
-        onChange={handleChange}
-      />
-      <div className='Pricerow'>
-        <button className='the-button' type='button' onClick={decrement}>
-          <FiMinus size={18} />
-        </button>
-        <button className='the-button' type='button' onClick={increment}>
-          <FiPlus size={18} />
-        </button>
-      </div>
-    </div>
-  );
-}*/
+import { handleError, handleSuccess } from "../../../utils";
 
 const customStyles = {
   control: (provided) => ({
@@ -76,8 +30,8 @@ const customStyles = {
     backgroundColor: state.isSelected
       ? "#CDE3F2"
       : state.isFocused
-        ? "#CDE3F2"
-        : "#fff",
+      ? "#CDE3F2"
+      : "#fff",
     color: "#000",
     borderRadius: "5px",
     cursor: "pointer",
@@ -117,7 +71,8 @@ const Vente = (props) => {
   const [quantiteNego, setQuantiteNego] = useState(false);
   const [type, setType] = useState("");
   const [gamme, setGamme] = useState("");
-  const [publier, setPublier] = useState(true);
+  const [publier, setPublier] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChangeType = (option) => {
     setType(option);
@@ -125,6 +80,53 @@ const Vente = (props) => {
 
   const handleChangeGamme = (option) => {
     setGamme(option);
+  };
+  const reset = () => {
+    setType("");
+    setGamme("");
+    setQuantite("");
+    setPrix("");
+    setQuantiteNego(false);
+    setPrixNego(false);
+    setError(false);
+  };
+  const handleAddOrder = async () => {
+    const cleanType =
+      typeof type === "object" && type.value ? type.value : type;
+    const cleanGamme = typeof gamme === "object" ? gamme.value : gamme;
+    const newOrder = {
+      title: props.title,
+      type: cleanType,
+      gamme: cleanGamme,
+      quantite: quantite,
+      prix: prix,
+      quantiteNego: quantiteNego,
+      prixNego: prixNego,
+      date: new Date().toISOString(),
+    };
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/addOrder/${props.user._id}`,
+        {
+          method: "PUT", // or POST depending on your API design
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newOrder),
+        }
+      );
+
+      if (response.ok) {
+        console.log("✅ Order added successfully");
+         handleSuccess("Order added successfully");
+      } else {
+        console.error("❌ Failed to add order");
+        handleError("Failed to add order");
+      }
+    } catch (error) {
+      console.error("❌ Error:", error);
+    }
   };
 
   return (
@@ -159,15 +161,19 @@ const Vente = (props) => {
             className="vente-input-prix"
             type="number"
             placeholder="Quantité"
+            value={quantite}
             onChange={(e) => setQuantite(e.target.value)}
           />
           <div className="prixdiv">
             <label className="custom-checkbox">
-              <input type="checkbox" className="prixcheckbox" name="agree" />
-              <span
-                className="checkmark"
-                onClick={() => setQuantiteNego(!quantiteNego)}
-              ></span>
+              <input
+                type="checkbox"
+                className="prixcheckbox"
+                name="agree"
+                checked={quantiteNego}
+                onChange={(e) => setQuantiteNego(e.target.checked)}
+              />
+              <span className="checkmark"></span>
               <span className="Prixlabel">Négociable</span>
             </label>
           </div>
@@ -179,15 +185,19 @@ const Vente = (props) => {
             className="vente-input-prix"
             type="number"
             placeholder="Prix"
+            value={prix}
             onChange={(e) => setPrix(e.target.value)}
           />
           <div className="prixdiv">
             <label className="custom-checkbox">
-              <input type="checkbox" className="prixcheckbox" name="agree" />
-              <span
-                className="checkmark"
-                onClick={() => setPrixNego(!prixNego)}
-              ></span>
+              <input
+                type="checkbox"
+                className="prixcheckbox"
+                name="agree"
+                checked={prixNego}
+                onChange={(e) => setPrixNego(e.target.checked)}
+              />
+              <span className="checkmark"></span>
               <span className="Prixlabel">Négociable</span>
             </label>
           </div>
@@ -210,7 +220,12 @@ const Vente = (props) => {
         </button>
         <button
           className="transaction-Bottom-vente-buttons2"
-          onClick={() => setPublier(!publier)}
+          onClick={() => {
+            if (!type || !gamme || !quantite || !prix) {
+              return handleError("Veuillez remplir tous les champs");
+            }
+            setPublier(!publier);
+          }}
         >
           Publier
         </button>
@@ -244,10 +259,16 @@ const Vente = (props) => {
                 </label>
               </div>
               <div className="confirmation-values">
-                <a className="confirmation-values-a">{type ? type.label : 'Sélectionnez un type'}</a>
-                <a className="confirmation-values-a">{gamme ? gamme.label : 'Sélectionnez une gamme'}</a>
+                <a className="confirmation-values-a">
+                  {type ? type.label : "Vide"}
+                </a>
+                <a className="confirmation-values-a">
+                  {gamme ? gamme.label : "Vide"}
+                </a>
                 <div>
-                  <a className="confirmation-values-a">{quantite ? quantite : 'Vide'}</a>
+                  <a className="confirmation-values-a">
+                    {quantite ? quantite : "Vide"}
+                  </a>
                   {quantiteNego ? (
                     <FaHandshake style={{ color: "#166534" }} size={20} />
                   ) : (
@@ -255,7 +276,10 @@ const Vente = (props) => {
                   )}
                 </div>
                 <div>
-                  <a className="confirmation-values-a">{prix ? prix : 'Vide'}{prix ? 'dt' : ''}</a>{" "}
+                  <a className="confirmation-values-a">
+                    {prix ? prix : "Vide"}
+                    {prix ? "DT" : ""}
+                  </a>{" "}
                   {prixNego ? (
                     <FaHandshake style={{ color: "#166534" }} size={20} />
                   ) : (
@@ -268,11 +292,22 @@ const Vente = (props) => {
             <div className="Pricerow">
               <button
                 className="transaction-Bottom-vente-buttons1"
-                onClick={() => setPublier(!publier)}
+                onClick={() => {
+                  setPublier(!publier);
+                  reset();
+
+                }}
               >
                 cancel
               </button>
-              <button className="transaction-Bottom-vente-buttons2">
+              <button
+                className="transaction-Bottom-vente-buttons2"
+                onClick={() => {
+                  handleAddOrder();
+                  setPublier(!publier);
+                  reset();
+                }}
+              >
                 confirme
               </button>
             </div>
@@ -287,8 +322,8 @@ const Vente = (props) => {
 
 Vente.propTypes = {
   setvente: PropTypes.func.isRequired,
-  setmodifier: PropTypes.func, // Add this line for setmodifier prop validation
-  modifier: PropTypes.any, // Add this line for modifier prop validation
+  setmodifier: PropTypes.func,
+  modifier: PropTypes.any,
   title: PropTypes.string.isRequired,
 };
 

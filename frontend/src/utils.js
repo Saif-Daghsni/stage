@@ -7,7 +7,9 @@ export const handleSuccess = (msg) => {
 }
 
 export const handleError = (msg) => {
+    console.log("Error before:", msg);
     toast.error(msg, {
         position: 'top-right'
-    })
+    });
+    console.log("Error after:", msg);
 }

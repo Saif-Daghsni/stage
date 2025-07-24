@@ -30,7 +30,6 @@ const User = (props) => {
       <div className="users-buttom">
         {users.map((user) => {
           if (props.user._id === user._id) {
-            console.log("❌ User with same ID found:", user._id);
             return null;
           }
           return (

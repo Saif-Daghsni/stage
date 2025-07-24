@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./Chat_Page.css";
 import AchatOptions from "../tools/Transactions/AchatOptions";
 import Vente from "../tools/Transactions/Vente";
-import User from "../tools/Users/User";
 import Chat from "../tools/chat/Chat";
+import User from "../tools/Users/User";
+import { handleError, handleSuccess } from "../../utils";
 import Layout from "../../components/layout";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 const Chat_Page = () => {
   const [achat, setachat] = useState(false);
   const [vente, setvente] = useState(false);
@@ -31,12 +35,13 @@ const Chat_Page = () => {
       .catch((err) => console.error("Error fetching user:", err));
   }, []);
 
- if(!user) {
-  let loading = <div className="loading">Loading...</div>;
-  return loading;
+  if (!user) {
+    let loading = <div className="loading">Loading...</div>;
+    return loading;
   }
   return (
     <Layout>
+      <ToastContainer position="bottom-right" />
       <div>
         <div className="topBar"></div>
 
@@ -46,9 +51,7 @@ const Chat_Page = () => {
               <label className="logo">Chat</label>
 
               <div className="divs">
-                <div className="users">
-                  {user && <User user={user}/>}
-                </div>
+                <div className="users">{user && <User user={user} />}</div>
 
                 <div className="chat">
                   <Chat />
@@ -60,18 +63,21 @@ const Chat_Page = () => {
                     <label className="transaction-label">
                       Repertoire des transactions
                     </label>
-                    <button className="transaction-button">
+
+                    <button
+                      className="transaction-button"
+                    >
                       <img src="/transactions/Vector.png" alt="img1" />
                     </button>
                   </div>
 
                   {vente ? (
                     <>
-                      <Vente title={"Vente"} setvente={setvente} />
+                      <Vente title={"Vente"} setvente={setvente} user={user} />
                     </>
                   ) : achat ? (
                     <>
-                      <Vente title={"Achat"} setvente={setachat} />
+                      <Vente title={"Achat"} setvente={setachat} user={user} />
                     </>
                   ) : conversation ? (
                     <div className="achat">

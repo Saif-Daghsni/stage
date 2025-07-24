@@ -40,6 +40,33 @@ app.get('/me', verifyToken, async (req, res) => {
   }
 });
 
+
+// Add a new order to a user
+app.put('/addOrder/:userId', async (req, res) => {
+  console.log("PUT /addOrder called");  // <-- Add this to see if route is hit
+  console.log("User ID:", req.params.userId);
+  console.log("Order data:", req.body);
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      { $push: { orders: req.body } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'Order added successfully', user: updatedUser });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+
+
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
