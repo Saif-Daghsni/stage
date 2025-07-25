@@ -17,6 +17,20 @@ const Chat_Page = () => {
   const [conversation, setConversation] = useState(false);
   const [historique, sethistorique] = useState(false);
   const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/getAllUsers")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("✅ Users fetched:", data);
+        if (Array.isArray(data)) {
+          setUsers(data);
+        } else {
+          setUsers([]);
+        }
+      })
+      .catch((err) => console.error("❌ Fetch Users error:", err));
+  }, [vente,achat,]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -51,7 +65,9 @@ const Chat_Page = () => {
               <label className="logo">Chat</label>
 
               <div className="divs">
-                <div className="users">{user && <User user={user} />}</div>
+                <div className="users">
+                  {user && <User users={users} user={user} />}
+                </div>
 
                 <div className="chat">
                   <Chat />
@@ -94,14 +110,21 @@ const Chat_Page = () => {
                             Besoin de vente
                           </button>
                         </div>
-
-                        <AchatOptions button={"Consulter"} />
-                        <AchatOptions button={"Consulter"} />
-                        <AchatOptions button={"Consulter"} />
-                        <AchatOptions button={"Consulter"} />
-                        <AchatOptions button={"Consulter"} />
-                        <AchatOptions button={"Consulter"} />
-                        <AchatOptions button={"Consulter"} />
+                        {users.map((user) =>
+                          user.orders.map((order, index) => (
+                            <AchatOptions
+                              user={user}
+                              button={"Modifier"}
+                              type={order.type}
+                              gamme={order.gamme}
+                              quantite={order.quantite}
+                              prix={order.prix}
+                              quantiteNego={order.quantiteNego}
+                              prixNego={order.prixNego}
+                              key={index}
+                            />
+                          ))
+                        )}
                       </div>
 
                       <button

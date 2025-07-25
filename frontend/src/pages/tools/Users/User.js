@@ -6,26 +6,12 @@ import { handleError } from "../../../utils";
 
 const User = (props) => {
   const [selected, setselected] = useState(false);
-  const [users, setUsers] = useState([]);
   const [researh, setresearh] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/getAllUsers")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("✅ Users fetched:", data);
-        if (Array.isArray(data)) {
-          setUsers(data);
-        } else {
-          setUsers([]);
-        }
-      })
-      .catch((err) => console.error("❌ Fetch Users error:", err));
-  }, []);
 
   useEffect(() => {
-    const result = users.filter((user) =>
+    const result = props.users.filter((user) =>
       user.name.toLowerCase().includes(researh.toLowerCase())
     && user.name !== props.user.name
     );
@@ -33,7 +19,7 @@ const User = (props) => {
       return handleError("Utilisateur non trouvé");
     }
     setFilteredUsers(result);
-  }, [researh, users]);
+  }, [researh, props.users]);
   return (
     <div className="users-container">
       <div className="input-wrapper">
@@ -56,7 +42,7 @@ const User = (props) => {
                 name={user.name}
               />
             ))
-          : users.map((user) => {
+          : props.users.map((user) => {
               if (props.user._id === user._id) {
                 return null;
               }
