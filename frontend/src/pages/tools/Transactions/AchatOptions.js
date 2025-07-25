@@ -27,9 +27,7 @@ const AchatOptions = (props) => {
         </div>
 
         <div className="option-details">
-          <label className="option-details-title">
-            Demande de Tony Reichert
-          </label>
+          <label className="option-details-title">{props.user.name}</label>
 
           <div className="option-details-title-container">
             <div className="option-details-title-container-title">
@@ -51,15 +49,23 @@ const AchatOptions = (props) => {
               </label>
             </div>
             <div className="option-details-title-container-values">
-              <a>Matiere premiers</a>
-              <a>Moyenne gamme</a>
+              <a>{props.type}</a>
+              <a>{props.gamme}</a>
               <div>
-                <a>40</a>
-                <FaHandshake style={{ color: "#166534" }} size={20} />
+                <a>{props.quantite}</a>
+                {props.quantiteNego === 0 ? (
+                  <FaHandshake style={{ color: "#166534" }} size={20} />
+                ) : (
+                  <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+                )}
               </div>
               <div>
-                <a>200.000 dt</a>
-                <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+                <a>{props.prix} DT</a>
+                {props.prixNego === 0 ? (
+                  <FaHandshake style={{ color: "#166534" }} size={20} />
+                ) : (
+                  <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+                )}
               </div>
             </div>
           </div>
@@ -125,7 +131,16 @@ const AchatOptions = (props) => {
 
       {details && (
         <>
-          <Details setdetails={setdetails} />
+          <Details
+            user={props.user}
+            type={props.type}
+            gamme={props.gamme}
+            quantite={props.quantite}
+            prix={props.prix}
+            quantiteNego={props.quantiteNego}
+            prixNego={props.prixNego}
+            setdetails={setdetails}
+          />
         </>
       )}
 
@@ -133,7 +148,7 @@ const AchatOptions = (props) => {
 
       {recherche && (
         <>
-          <Share setrecherche={setrecherche} />
+          <Share user={props.user} setrecherche={setrecherche} />
         </>
       )}
 

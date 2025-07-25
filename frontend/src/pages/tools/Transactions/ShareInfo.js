@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ShareInfo.css";
 
-const ShareInfo = () => {
+const ShareInfo = (props) => {
   const [selected, setselected] = useState(false);
+  useEffect(() => {
+    console.log("✅ Selected users updated:", props.selectedusers);
+  }, [props.selectedusers]);
+
   return (
     <div
       className={selected ? "ShareInfo-active" : "ShareInfo-inactive"}
-      onClick={() => setselected(!selected)}
+      onClick={() => {
+        setselected(!selected);
+
+        if (props.selectedusers.includes(props.user._id)) {
+          // Remove user
+          props.setSelectedUsers(props.selectedusers.filter((id) => id !== props.user._id));
+        } else {
+          // Add user
+          props.setSelectedUsers([...props.selectedusers, props.user._id]);
+        }
+      }}
     >
       <div className="ShareInfo-div-img">
         <img src="/Users/Avatar.png" alt="Avatar" />
       </div>
 
       <div className="ShareInfo-name">
-        <h5>Tony Reichert</h5>
+        <h5>{props.name}</h5>
       </div>
 
       <label

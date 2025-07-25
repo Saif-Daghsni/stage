@@ -64,9 +64,7 @@ const Chat_Page = () => {
                       Repertoire des transactions
                     </label>
 
-                    <button
-                      className="transaction-button"
-                    >
+                    <button className="transaction-button">
                       <img src="/transactions/Vector.png" alt="img1" />
                     </button>
                   </div>
@@ -146,13 +144,40 @@ const Chat_Page = () => {
                         </div>
                         {Lesachat && (
                           <>
-                            <AchatOptions button={"Modifier"} />
+                            {user.orders.map((order, index) =>
+                              order.title === "Achat" ? (
+                                <AchatOptions
+                                  user={user}
+                                  button={"Modifier"}
+                                  type={order.type}
+                                  gamme={order.gamme}
+                                  quantite={order.quantite}
+                                  prix={order.prix}
+                                  quantiteNego={order.quantiteNego}
+                                  prixNego={order.prixNego}
+                                  key={index}
+                                />
+                              ) : null
+                            )}
                           </>
                         )}
                         {Lesvente && (
                           <>
-                            <AchatOptions button={"Modifier"} />
-                            <AchatOptions button={"Modifier"} />
+                            {user.orders.map((order, index) =>
+                              order.title === "Vente" ? (
+                                <AchatOptions
+                                  user={user}
+                                  button={"Modifier"}
+                                  type={order.type}
+                                  gamme={order.gamme}
+                                  quantite={order.quantite}
+                                  prix={order.prix}
+                                  quantiteNego={order.quantiteNego}
+                                  prixNego={order.prixNego}
+                                  key={index}
+                                />
+                              ) : null
+                            )}
                           </>
                         )}
                       </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Details.css";
+import { FaHandshake } from "react-icons/fa";
+
 const Details = (props) => {
   return (
     <div className="option-details-details">
@@ -12,7 +14,7 @@ const Details = (props) => {
             alt=""
           />
         </div>
-        <div className="option-details-details-name">Tony Reichert</div>
+        <div className="option-details-details-name">{props.user.name}</div>
       </div>
       <div className="option-details-details-buttom">
         <div className="option-details-details-buttom-title">
@@ -41,12 +43,26 @@ const Details = (props) => {
           </div>
         </div>
         <div className="option-details-details-buttom-values">
-          <p>Matiere premiere</p>
-          <p>Haut de gamme</p>
+          <p>{props.type}</p>
+          <p>{props.gamme}</p>
           <p>EDFT</p>
           <p>5</p>
-          <p>5</p>
-          <p>200</p>
+          <div className="detailsRow">
+            <p>{props.quantite}</p>
+            {props.quantiteNego === 0 ? (
+              <FaHandshake style={{ color: "#166534" }} size={20} />
+            ) : (
+              <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+            )}
+          </div>
+          <div className="detailsRow">
+            <p>{props.prix}</p>
+            {props.prixNego === 0 ? (
+              <FaHandshake style={{ color: "#166534" }} size={20} />
+            ) : (
+              <FaHandshake style={{ color: "#B91C1C" }} size={20} />
+            )}
+          </div>
         </div>
       </div>
       <button
