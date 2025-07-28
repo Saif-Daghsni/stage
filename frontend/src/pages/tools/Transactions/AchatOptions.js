@@ -18,6 +18,7 @@ const AchatOptions = (props) => {
   const [modifier, setmodifier] = useState(false);
   const [recherche, setrecherche] = useState(false);
   const [supprimer, setsupprimer] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   return (
     <div className="option">
@@ -89,7 +90,6 @@ const AchatOptions = (props) => {
                 className="option-details-Consulter-supprimer"
                 onClick={() => {
                   setsupprimer(true);
-                  console.log("Supprime clicked");
                 }}
               >
                 Supprimer
@@ -162,7 +162,19 @@ const AchatOptions = (props) => {
         </>
       )}
 
-      {supprimer && <Supprimer setsupprimer={setsupprimer} />}
+      {supprimer && (
+        <Supprimer
+          onClick={() => {
+            setSelectedOrder(props.order);
+          }}
+          setsupprimer={setsupprimer}
+          order={props.order}
+          user={props.user}
+          selectedOrder={props.order}
+          setUser={props.setUser}
+          setUsers={props.setUsers}
+        />
+      )}
     </div>
   );
 };

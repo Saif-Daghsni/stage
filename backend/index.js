@@ -65,7 +65,25 @@ app.put('/addOrder/:userId', async (req, res) => {
   }
 });
 
+app.delete('/deleteOrder/:userId/:orderId', async (req, res) => {
+  try {
+    const { userId, orderId } = req.params;
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { orders: { _id: orderId } } },
+      { new: true }
+    );
 
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'Order deleted successfully', user: updatedUser });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;

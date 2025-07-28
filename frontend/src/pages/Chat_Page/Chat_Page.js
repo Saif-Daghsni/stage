@@ -15,9 +15,12 @@ const Chat_Page = () => {
   const [Lesvente, setLesvente] = useState(false);
   const [Lesachat, setLesachat] = useState(true);
   const [conversation, setConversation] = useState(false);
-  const [historique, sethistorique] = useState(false);
+  const [historique, sethistorique] = useState(true);
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
+  useEffect(() => {
+    console.log("User orders updated:", user?.orders);
+  }, [user?.orders]);
   useEffect(() => {
     fetch("http://localhost:5000/getAllUsers")
       .then((res) => res.json())
@@ -30,7 +33,8 @@ const Chat_Page = () => {
         }
       })
       .catch((err) => console.error("❌ Fetch Users error:", err));
-  }, [vente,achat,]);
+  }, [vente, achat]);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -114,7 +118,7 @@ const Chat_Page = () => {
                           user.orders.map((order, index) => (
                             <AchatOptions
                               user={user}
-                              button={"Modifier"}
+                              button={"Consulter"}
                               type={order.type}
                               gamme={order.gamme}
                               quantite={order.quantite}
@@ -167,9 +171,11 @@ const Chat_Page = () => {
                         </div>
                         {Lesachat && (
                           <>
-                            {user.orders.map((order, index) =>
+                            {user.orders.map((order) =>
                               order.title === "Achat" ? (
                                 <AchatOptions
+                                  setUser={setUser}
+                                  order={order}
                                   user={user}
                                   button={"Modifier"}
                                   type={order.type}
@@ -178,7 +184,7 @@ const Chat_Page = () => {
                                   prix={order.prix}
                                   quantiteNego={order.quantiteNego}
                                   prixNego={order.prixNego}
-                                  key={index}
+                                  key={order._id}
                                 />
                               ) : null
                             )}
@@ -189,6 +195,8 @@ const Chat_Page = () => {
                             {user.orders.map((order, index) =>
                               order.title === "Vente" ? (
                                 <AchatOptions
+                                  setUser={setUser}
+                                  order={order}
                                   user={user}
                                   button={"Modifier"}
                                   type={order.type}
