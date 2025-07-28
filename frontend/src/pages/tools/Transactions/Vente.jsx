@@ -90,6 +90,61 @@ const Vente = (props) => {
     setPrixNego(false);
     setError(false);
   };
+  const handleModifierOrder = async () => {
+    const cleanType =
+      typeof type === "object" && type.value ? type.value : type;
+    const cleanGamme = typeof gamme === "object" ? gamme.value : gamme;
+    const updatedOrder = {
+      type: cleanType,
+      gamme: cleanGamme,
+      quantite: quantite,
+      prix: prix,
+      quantiteNego: quantiteNego,
+      prixNego: prixNego,
+      date: new Date().toISOString(),
+    };
+    console.log("Updated Order:", updatedOrder);
+    console.log("User ID:", props.user._id);
+    console.log("Order ID:", props.selectedOrder._id);
+    try {
+      const response = await fetch(
+        `http://localhost:5000/updateOrder/${props.user._id}/${props.selectedOrder._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedOrder),
+        }
+      );
+      if (response.ok) {
+        console.log("✅ Order updated successfully");
+        handleSuccess("Order updated successfully");
+
+        // Refresh user data
+        const token = localStorage.getItem("token");
+        if (token) {
+          const userResponse = await fetch("http://localhost:5000/me", {
+            method: "GET",
+            headers: {
+              Authorization: token,
+            },
+          });
+          const userData = await userResponse.json();
+          props.setUser(userData);
+        }
+
+        props.setmodifier(false);
+        reset();
+      } else {
+        console.error("❌ Failed to update order");
+        handleError("Failed to update order");
+      }
+    } catch (error) {
+      console.error("❌ Error:", error);
+      handleError("An error occurred while updating the order");
+    }
+  };
   const handleAddOrder = async () => {
     const cleanType =
       typeof type === "object" && type.value ? type.value : type;
@@ -119,7 +174,23 @@ const Vente = (props) => {
 
       if (response.ok) {
         console.log("✅ Order added successfully");
-         handleSuccess("Order added successfully");
+        handleSuccess("Order added successfully");
+
+        // Refresh user data
+        const token = localStorage.getItem("token");
+        if (token) {
+          const userResponse = await fetch("http://localhost:5000/me", {
+            method: "GET",
+            headers: {
+              Authorization: token,
+            },
+          });
+          const userData = await userResponse.json();
+          props.setUser(userData);
+        }
+
+        props.setvente(false);
+        reset();
       } else {
         console.error("❌ Failed to add order");
         handleError("Failed to add order");
@@ -295,7 +366,6 @@ const Vente = (props) => {
                 onClick={() => {
                   setPublier(!publier);
                   reset();
-
                 }}
               >
                 cancel
@@ -303,9 +373,15 @@ const Vente = (props) => {
               <button
                 className="transaction-Bottom-vente-buttons2"
                 onClick={() => {
-                  handleAddOrder();
-                  setPublier(!publier);
-                  reset();
+                  if (props.title === "Modifier") {
+                    handleModifierOrder();
+                    setPublier(!publier);
+                    reset();
+                  } else {
+                    handleAddOrder();
+                    setPublier(!publier);
+                    reset();
+                  }
                 }}
               >
                 confirme

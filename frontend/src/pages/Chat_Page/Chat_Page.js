@@ -91,11 +91,11 @@ const Chat_Page = () => {
 
                   {vente ? (
                     <>
-                      <Vente title={"Vente"} setvente={setvente} user={user} />
+                      <Vente title={"Vente"} setvente={setvente} user={user} setUser={setUser}  />
                     </>
                   ) : achat ? (
                     <>
-                      <Vente title={"Achat"} setvente={setachat} user={user} />
+                      <Vente title={"Achat"} setvente={setachat} user={user} setUser={setUser}  />
                     </>
                   ) : conversation ? (
                     <div className="achat">
@@ -185,6 +185,7 @@ const Chat_Page = () => {
                                   quantiteNego={order.quantiteNego}
                                   prixNego={order.prixNego}
                                   key={order._id}
+                                  setvente={setvente}
                                 />
                               ) : null
                             )}
@@ -206,6 +207,7 @@ const Chat_Page = () => {
                                   quantiteNego={order.quantiteNego}
                                   prixNego={order.prixNego}
                                   key={index}
+                                  setvente={setvente}
                                 />
                               ) : null
                             )}

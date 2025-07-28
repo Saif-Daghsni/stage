@@ -158,6 +158,11 @@ const AchatOptions = (props) => {
             title={"Modifier"}
             confirme={"Mettre à jour "}
             setmodifier={setmodifier}
+            order={props.order}
+            setvente={props.setvente}
+            selectedOrder={props.order}
+            user={props.user}
+            setUser={props.setUser}
           />
         </>
       )}
