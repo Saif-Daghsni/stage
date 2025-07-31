@@ -1,14 +1,11 @@
 import React from "react";
 import "./FirstUser.css";
 import { BiCheckDouble } from "react-icons/bi";
-const FirstUser = () => {
+const FirstUser = (props) => {
   return (
     <div className="FirstUser">
       <div className="FirstUser-message">
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae
-          voluptatem perspiciatis iste deleniti doloremque molestiae 
-    
+        <p>{props.message}
         </p>
         <div className="FirstUser-bottom">
           il y a 6 minutes

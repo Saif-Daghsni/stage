@@ -20,6 +20,7 @@ const User = (props) => {
     }
     setFilteredUsers(result);
   }, [researh, props.users]);
+
   return (
     <div className="users-container">
       <div className="input-wrapper">
@@ -38,7 +39,9 @@ const User = (props) => {
                 key={user._id}
                 id={user._id}
                 selected={selected === user._id}
-                onClick={() => setselected(user._id)}
+                onClick={() => {setselected(user._id);
+                  props.setSelecteduser(user);
+                }}
                 name={user.name}
               />
             ))
@@ -51,7 +54,9 @@ const User = (props) => {
                   key={user._id}
                   id={user._id}
                   selected={selected === user._id}
-                  onClick={() => setselected(user._id)}
+                  onClick={() => {setselected(user._id);
+                    props.setSelecteduser(user);
+                  }}
                   name={user.name}
                 />
               );

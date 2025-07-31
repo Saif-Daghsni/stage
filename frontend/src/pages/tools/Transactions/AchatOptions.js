@@ -10,6 +10,7 @@ import Details from "./Details";
 import { BiShareAlt } from "react-icons/bi";
 import Share from "./Share";
 import Supprimer from "./Supprimer";
+import { FaUserCircle } from "react-icons/fa";
 
 const AchatOptions = (props) => {
   const [details, setdetails] = useState(false);
@@ -24,7 +25,7 @@ const AchatOptions = (props) => {
     <div className="option">
       <div className="row">
         <div className="option-photo">
-          <img src="transactions/profile.png" alt="profile" />
+          <FaUserCircle size={40} color="#3b5998" />
         </div>
 
         <div className="option-details">

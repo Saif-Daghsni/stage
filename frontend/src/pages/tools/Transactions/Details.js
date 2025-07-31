@@ -2,17 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Details.css";
 import { FaHandshake } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 const Details = (props) => {
   return (
     <div className="option-details-details">
       <div className="option-details-details-top">
         <div className="option-details-details-img">
-          <img
-            style={{ width: "50px", height: "50px" }}
-            src="/Users/Avatar.png"
-            alt=""
-          />
+          <div className="option-photo">
+            <FaUserCircle size={42} color="#3b5998" />
+          </div>
         </div>
         <div className="option-details-details-name">{props.user.name}</div>
       </div>

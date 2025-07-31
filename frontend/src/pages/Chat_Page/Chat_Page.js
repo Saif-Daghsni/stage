@@ -15,12 +15,14 @@ const Chat_Page = () => {
   const [Lesvente, setLesvente] = useState(false);
   const [Lesachat, setLesachat] = useState(true);
   const [conversation, setConversation] = useState(false);
-  const [historique, sethistorique] = useState(true);
+  const [historique, sethistorique] = useState(false);
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [selecteduser, setSelecteduser] = useState([]);
+
   useEffect(() => {
-    console.log("User orders updated:", user?.orders);
   }, [user?.orders]);
+
   useEffect(() => {
     fetch("http://localhost:5000/getAllUsers")
       .then((res) => res.json())
@@ -70,11 +72,11 @@ const Chat_Page = () => {
 
               <div className="divs">
                 <div className="users">
-                  {user && <User users={users} user={user} />}
+                  {user && <User setSelecteduser={setSelecteduser} users={users} user={user} />}
                 </div>
 
                 <div className="chat">
-                  <Chat />
+                  <Chat user={user} selecteduser={selecteduser} />
                 </div>
 
                 {/* debut  transaction */}

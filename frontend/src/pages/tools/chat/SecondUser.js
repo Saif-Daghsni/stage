@@ -2,15 +2,11 @@ import React from 'react'
 import "./SecondUser.css";
 import { BiCheckDouble } from "react-icons/bi";
 
-const SecondUser = () => {
+const SecondUser = (props) => {
   return (
       <div className="SecondUser">
         <div className="SecondUser-message">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae
-            voluptatem perspiciatis iste deleniti doloremque molestiae 
-      
-          </p>
+          <p>{props.message}</p>
           <div className="SecondUser-bottom">
             il y a 6 minutes
             <BiCheckDouble

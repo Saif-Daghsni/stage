@@ -7,6 +7,7 @@ import User from "./Models/User.js";
 import authRouter from "./Routes/AuthRouter.js";
 import cors from "cors";
 import verifyToken from "./Middlewares/Auth.js";
+import Conversation from "./Models/Conversation.js";
 
 const app = express();
 
@@ -115,9 +116,56 @@ app.put('/updateOrder/:userId/:orderId', async (req, res) => {
   }
 });
 
+app.post("/conversations", verifyToken, async (req, res) => {
+  const { members, messages } = req.body;
 
+  if (!members || !Array.isArray(members) || members.length !== 2) {
+    return res.status(400).json({ error: "Invalid members array" });
+  }
+
+  try {
+    // Sort members to avoid duplicate conversations (e.g., [A, B] vs [B, A])
+    const sortedMembers = members.sort();
+
+    // Check if a conversation already exists
+    let conversation = await Conversation.findOne({
+      members: { $all: sortedMembers },
+    });
+
+    if (conversation) {
+      // Update existing conversation
+      conversation.messages.push(messages[0]); // Add the new message
+      await conversation.save();
+    } else {
+      // Create new conversation
+      conversation = await Conversation.create({
+        members: sortedMembers,
+        messages,
+      });
+    }
+
+    res.status(200).json(conversation);
+  } catch (error) {
+    console.error("Error in /conversations:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/GetConversations", verifyToken, async (req, res) => {
+  try {
+    const conversations = await Conversation.find({
+      members: req.user.id,
+    }).populate("messages.senderId", "name email"); // Populate senderId with user details
+    res.status(200).json(conversations);
+  } catch (error) {
+    console.error("Error fetching conversations:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur le port ${PORT}`);
 });
+
+
