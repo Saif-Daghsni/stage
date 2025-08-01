@@ -90,7 +90,7 @@ app.delete("/deleteOrder/:userId/:orderId", async (req, res) => {
   }
 });
 
-app.put('/updateOrder/:userId/:orderId', async (req, res) => {
+app.put("/updateOrder/:userId/:orderId", async (req, res) => {
   const { userId, orderId } = req.params;
   const updatedOrder = req.body;
 
@@ -98,11 +98,11 @@ app.put('/updateOrder/:userId/:orderId', async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // ✅ Find the order subdocument directly
+    //  Find the order subdocument directly
     const order = user.orders.id(orderId);
     if (!order) return res.status(404).json({ message: "Order not found" });
 
-    // ✅ Update only the fields of the subdocument
+    //  Update only the fields of the subdocument
     Object.keys(updatedOrder).forEach((key) => {
       order[key] = updatedOrder[key];
     });
@@ -155,17 +155,38 @@ app.get("/GetConversations", verifyToken, async (req, res) => {
   try {
     const conversations = await Conversation.find({
       members: req.user.id,
-    }).populate("messages.senderId", "name email"); // Populate senderId with user details
+    }).populate("messages.senderId", "name email");
     res.status(200).json(conversations);
   } catch (error) {
     console.error("Error fetching conversations:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+app.get("/GetLastMessages", verifyToken, async (req, res) => {
+  try {
+    const conversations = await Conversation.find({
+      members: req.user.id,
+    }).populate("messages.senderId", "name email");
+
+    const lastMessages = conversations.map((conversation) => {
+      const lastMessage = conversation.messages.at(-1);
+      return {
+        userId: conversation.members.find((id) => id.toString() !== req.user.id),
+        lastMessage: lastMessage?.content || "",
+      };
+    });
+
+    res.status(200).json(lastMessages);
+  } catch (error) {
+    console.error("Error fetching last messages:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur le port ${PORT}`);
 });
-
-

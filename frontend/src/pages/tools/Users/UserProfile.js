@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./UserProfile.css";
 import { FaUserCircle } from "react-icons/fa";
 
-const UserProfile = ({ id, selected, onClick,name }) => {
+const UserProfile = ({ id, selected, onClick,name, lastMessage }) => {
 
 
   return (
@@ -12,7 +12,6 @@ const UserProfile = ({ id, selected, onClick,name }) => {
       onClick={() => onClick(id)}
     >
       <div className="UserProfile-photo">
-        {/* <img src="/Users/Avatar.png" alt="" /> */}
         <FaUserCircle size={40} color="#3b5998" />
       </div>
 
@@ -21,7 +20,7 @@ const UserProfile = ({ id, selected, onClick,name }) => {
           <label htmlFor="">{name}</label>
           <p>1h</p>
         </div>
-        <p>Lorem ipsum dolor sit amet, dolor..</p>
+        <p>{lastMessage}</p>
       </div>
     </div>
   );

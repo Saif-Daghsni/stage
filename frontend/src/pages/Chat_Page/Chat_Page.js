@@ -19,9 +19,9 @@ const Chat_Page = () => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [selecteduser, setSelecteduser] = useState([]);
+  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-  }, [user?.orders]);
+  useEffect(() => {}, [user?.orders]);
 
   useEffect(() => {
     fetch("http://localhost:5000/getAllUsers")
@@ -72,11 +72,19 @@ const Chat_Page = () => {
 
               <div className="divs">
                 <div className="users">
-                  {user && <User setSelecteduser={setSelecteduser} users={users} user={user} />}
+                  {user && (
+                    <User
+                      setSelecteduser={setSelecteduser}
+                      users={users}
+                      user={user}
+                      selecteduser={selecteduser}
+                      message={message}
+                    />
+                  )}
                 </div>
 
                 <div className="chat">
-                  <Chat user={user} selecteduser={selecteduser} />
+                  <Chat user={user} selecteduser={selecteduser} message={message} setMessage={setMessage} />
                 </div>
 
                 {/* debut  transaction */}
@@ -93,11 +101,21 @@ const Chat_Page = () => {
 
                   {vente ? (
                     <>
-                      <Vente title={"Vente"} setvente={setvente} user={user} setUser={setUser}  />
+                      <Vente
+                        title={"Vente"}
+                        setvente={setvente}
+                        user={user}
+                        setUser={setUser}
+                      />
                     </>
                   ) : achat ? (
                     <>
-                      <Vente title={"Achat"} setvente={setachat} user={user} setUser={setUser}  />
+                      <Vente
+                        title={"Achat"}
+                        setvente={setachat}
+                        user={user}
+                        setUser={setUser}
+                      />
                     </>
                   ) : conversation ? (
                     <div className="achat">

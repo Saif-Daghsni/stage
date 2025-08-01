@@ -8,12 +8,38 @@ const User = (props) => {
   const [selected, setselected] = useState(false);
   const [researh, setresearh] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [usersMessages, setUsersMessages] = useState([]);
 
+  const handleGetTheLastMessages = () => {
+    const token = localStorage.getItem("token"); // or sessionStorage, wherever you store it
+    console.log("🔑 Token:", token);
+
+    fetch(`http://localhost:5000/GetLastMessages`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("✅ Last messages fetched:", data);
+        if (Array.isArray(data)) {
+          setUsersMessages(data);
+        } else {
+          setUsersMessages([]);
+        }
+      })
+      .catch((err) => console.error("❌ Fetch last messages error:", err));
+  };
 
   useEffect(() => {
-    const result = props.users.filter((user) =>
-      user.name.toLowerCase().includes(researh.toLowerCase())
-    && user.name !== props.user.name
+    handleGetTheLastMessages();
+  }, [props.user._id,props.message]);
+
+  useEffect(() => {
+    const result = props.users.filter(
+      (user) =>
+        user.name.toLowerCase().includes(researh.toLowerCase()) &&
+        user.name !== props.user.name
     );
     if (result === "") {
       return handleError("Utilisateur non trouvé");
@@ -39,7 +65,12 @@ const User = (props) => {
                 key={user._id}
                 id={user._id}
                 selected={selected === user._id}
-                onClick={() => {setselected(user._id);
+                lastMessage={
+                  usersMessages.find((msg) => msg.userId === user._id)
+                    ?.lastMessage || "salam"
+                }
+                onClick={() => {
+                  setselected(user._id);
                   props.setSelecteduser(user);
                 }}
                 name={user.name}
@@ -54,9 +85,14 @@ const User = (props) => {
                   key={user._id}
                   id={user._id}
                   selected={selected === user._id}
-                  onClick={() => {setselected(user._id);
+                  onClick={() => {
+                    setselected(user._id);
                     props.setSelecteduser(user);
                   }}
+                  lastMessage={
+                    usersMessages.find((msg) => msg.userId === user._id)
+                      ?.lastMessage || ""
+                  }
                   name={user.name}
                 />
               );

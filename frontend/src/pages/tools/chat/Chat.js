@@ -80,7 +80,7 @@ const Chat = (props) => {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
-  }, [getmessage,props.selecteduser]);
+  }, [getmessage, props.selecteduser]);
   useEffect(() => {
     const fetchMessages = async () => {
       try {
