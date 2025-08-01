@@ -84,7 +84,12 @@ const Chat_Page = () => {
                 </div>
 
                 <div className="chat">
-                  <Chat user={user} selecteduser={selecteduser} message={message} setMessage={setMessage} />
+                  <Chat
+                    user={user}
+                    selecteduser={selecteduser}
+                    message={message}
+                    setMessage={setMessage}
+                  />
                 </div>
 
                 {/* debut  transaction */}

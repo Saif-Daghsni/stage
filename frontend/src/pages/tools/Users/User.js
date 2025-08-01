@@ -45,7 +45,7 @@ const User = (props) => {
       return handleError("Utilisateur non trouvé");
     }
     setFilteredUsers(result);
-  }, [researh, props.users]);
+  }, [researh, props.users,props.message]);
 
   return (
     <div className="users-container">

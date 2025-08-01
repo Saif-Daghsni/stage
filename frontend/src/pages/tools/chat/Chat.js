@@ -13,13 +13,13 @@ const Chat = (props) => {
   const messagesEndRef = useRef(null);
 
   const handleSendMessage = () => {
-    if (message.trim() === "") {
+    if (props.message.trim() === "") {
       return handleError("Le message est vide");
     }
 
     const newMessage = {
       senderId: props.user._id,
-      content: message,
+      content: props.message,
       timestamp: new Date().toISOString(),
       isRead: false,
     };
@@ -42,7 +42,7 @@ const Chat = (props) => {
           if (data.error) {
             return handleError(data.error);
           }
-          setMessage("");
+          props.setMessage("");
           fetchMessages();
         })
         .catch((err) => {
@@ -166,9 +166,9 @@ const Chat = (props) => {
           <input
             className="chat-input"
             type="text"
-            value={message}
+            value={props.message}
             placeholder="Enter a prompt here"
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => props.setMessage(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault(); // optional, in case the form submits
